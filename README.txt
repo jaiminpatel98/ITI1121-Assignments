@@ -1,1 +1,1 @@
-Repository README
+Jaimin Patel and Sam Worrod's ITI1121 assignment repository.
