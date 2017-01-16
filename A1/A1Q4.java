@@ -240,7 +240,38 @@ public class A1Q4{
 	private static int removePairs(String[] deckOfCards, int currentSize){
 	
 // REPLACE THE BODY OF THIS METHOD WITH YOUR OWN IMPLEMENTATION
-		return(2);
+		for(int i=0; i<currentSize; i++)
+		{
+			String firstCard=deckOfCards[i];
+			int firstNumber;
+			if(firstCard.length()==7)
+			{
+				firstNumber=Integer.parseInt(firstCard.substring(0,2));
+			}
+			else
+			{
+				firstNumber=Integer.parseInt(firstCard.substring(0,1));
+			}
+			for(int j=i; j<currentSize; j++)
+			{
+				String secondCard=deckOfCards[j];
+				int secondNumber;
+				if(secondCard.length()==7)
+				{
+					secondNumber=Integer.parseInt(secondCard.substring(0,2));
+				}
+				else
+				{
+					secondNumber=Integer.parseInt(secondCard.substring(0,1));
+				}
+				if(firstNumber==secondNumber)
+				{
+					removeItemByIndex(deckOfCards, currentSize, j);
+					removeItemByIndex(deckOfCards, currentSize, i);
+				}
+			}
+		}
+		return currentSize;
 
 	}
 
