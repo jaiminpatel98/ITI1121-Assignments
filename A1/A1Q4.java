@@ -314,9 +314,68 @@ public class A1Q4{
 	*  The actual game, as per the Python implementation
 	*/
 	public static void playGame(){
+		shuffleArray(deck, sizeDeck);
+		dealCards();
+		boolean flag = true;
+		System.out.println("Hello. My name is Robot and I am the dealer.");
+		System.out.println("Welcome to my card game!");
+		System.out.println("Your current deck of cards is: ");
+		printArray(playerDeck, sizePlayerDeck);
+		System.out.println("Do not worry. I cannot see the order of your cards.");
+		System.out.println("Now discard all the pairs from your deck. I will do the same.");
+		waitForUserInput();
+		removePairs(playerDeck, sizePlayerDeck);
+		removePairs(computerDeck, sizeComputerDeck);
+		while (true) {
+			if (sizePlayerDeck == 0) {
+				System.out.println("Congratulations! You beat me at Old Maid.");
+				flag = false; 
+			}
+			else if (sizeComputerDeck == 0) {
+				print("That is unfortunate for you! I beat you at Old Maid.");
+				flag = false;
+			}
+			System.out.println("*********************");
+			System.out.println("Your turn");
+			System.out.println("Your new hand is: ");
+			printArray(playerDeck, sizePlayerDeck);
+			System.out.println("I have " + sizeComputerDeck + " cards. If 1 represents my first card and " + sizeComputerDeck + " represents my last card,");
+			System.out.println("which of my cards do you choose?");
+			getValidInput();
+			System.out.println("The card you chose is " + computerDeck[userin-1]);
+			System.out.println("With " + computerDeck[userin-1] + " added to your hand, your current hand is: ");
+			appendItem(playerDeck, sizePlayerDeck, computerDeck[userin-1]);
+			removeItemByIndex(computerDeck, sizeComputerDeck, computerDeck[userin-1]);
+			printArray(playerDeck, sizePlayerDeck);
+			System.out.println("After discarding pairs and shuffling, your hand is: ");
+			removePairs(playerDeck, sizePlayerDeck);
+			printArray(playerDeck, sizePlayerDeck);
 
- // REPLACE THE BODY OF THIS METHOD WITH YOUR OWN IMPLEMENTATION
-		
+			waitForUserInput();
+
+			System.out.println("*********************");
+			System.out.println("My turn");
+			// random.nextInt(max - min + 1) + min
+			computerChoice = random.nextInt(sizePlayerDeck - 1 + 1) + min;
+			if (computerChoice == 1) {
+				System.out.println("I chose your 1st card");
+			}
+			else if (computerChoice == 2) {
+				System.out.println("I chose your 2nd card");
+			}
+			else if (computerChoice == 3) {
+				System.out.println("I chose you 3rd card");
+			}
+			else {
+				System.out.println("I chose your " + computerChoice + "th card");
+			}
+			appendItem(computerDeck, sizeComputerDeck, playerDeck[computerChoice-1]);
+			removeItemByIndex(playerDeck, sizePlayerDeck, playerDeck[computerChoice-1]);
+			removePairs(computerDeck, sizeComputerDeck);
+			waitForUserInput();
+		}
+
+
 	}
 
 

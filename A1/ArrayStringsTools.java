@@ -6,7 +6,7 @@
  * @author gvj (gvj@eecs.uottawa.ca)
  *
  */
-
+package tools;
 public class ArrayStringsTools{
 
 	/** 
