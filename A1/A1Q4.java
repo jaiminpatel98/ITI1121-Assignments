@@ -152,22 +152,22 @@ public class A1Q4{
 	/**
 	* Array used to store the player's deck of cards
 	*/
-	private static String[] playerDeck;
+	private static String[] playerDeck = new String [25];
 
 	/**
 	* The current number of cards in the player's deck of cards
 	*/
-	private static int sizePlayerDeck;
+	private static int sizePlayerDeck = 0;
 
 	/**
 	* Array used to store the computer's deck of cards
 	*/
-	private static String[] computerDeck;
+	private static String[] computerDeck = new String [26];
 
 	/**
 	* The current number of cards in the computer's deck of cards
 	*/
-	private static int sizeComputerDeck;
+	private static int sizeComputerDeck = 0;
 
 
 	/**
@@ -220,12 +220,10 @@ public class A1Q4{
 	private static void dealCards(){
 		for (int i=0; i<deck.length; i++) {
 			if (i%2==0) {
-				System.out.println("" + sizePlayerDeck + "" + playerDeck.length + "");
-				appendItem(playerDeck, sizePlayerDeck, deck[i]);
+				sizePlayerDeck=appendItem(playerDeck, sizePlayerDeck, deck[i]);
 			}
 			else {
-				System.out.println("" + sizeComputerDeck + "" + computerDeck.length + "");
-				appendItem(computerDeck, sizeComputerDeck, deck[i]);
+				sizeComputerDeck=appendItem(computerDeck, sizeComputerDeck, deck[i]);
 			}
 		}
 
