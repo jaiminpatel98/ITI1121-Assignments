@@ -190,6 +190,8 @@ public class A1Q4{
 		sc = new Scanner(System.in);
 		generator = new Random();
 
+
+
 		String[] suits = {"\u2660", "\u2661", "\u2662", "\u2663"};
 		String[] ranks = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
 		sizeDeck = suits.length*ranks.length - 1;
@@ -335,7 +337,7 @@ public class A1Q4{
 				flag = false; 
 			}
 			else if (sizeComputerDeck == 0) {
-				print("That is unfortunate for you! I beat you at Old Maid.");
+				System.out.println("That is unfortunate for you! I beat you at Old Maid.");
 				flag = false;
 			}
 
@@ -354,7 +356,7 @@ public class A1Q4{
 			System.out.println("With " + computerDeck[userin-1] + " added to your hand, your current hand is: ");
 
 			appendItem(playerDeck, sizePlayerDeck, computerDeck[userin-1]);
-			removeItemByIndex(computerDeck, sizeComputerDeck, computerDeck[(userin-1)]);
+			removeItemByIndex(computerDeck, sizeComputerDeck, userin);
 			printArray(playerDeck, sizePlayerDeck);
 
 			System.out.println("After discarding pairs and shuffling, your hand is: ");
@@ -365,8 +367,10 @@ public class A1Q4{
 
 			System.out.println("*********************");
 			System.out.println("My turn");
-			// random.nextInt(max - min + 1) + min
-			computerChoice = random.nextInt(sizePlayerDeck - 1 + 1) + min;
+
+			Random rand = new Random();
+			int computerChoice = rand.nextInt((sizePlayerDeck-1) + 1)+1;
+
 			if (computerChoice == 1) {
 				System.out.println("I chose your 1st card");
 			}
@@ -379,8 +383,8 @@ public class A1Q4{
 			else {
 				System.out.println("I chose your " + computerChoice + "th card");
 			}
-			appendItem(computerDeck, sizeComputerDeck, playerDeck[(computerChoice-1)]);
-			removeItemByIndex(playerDeck, sizePlayerDeck, playerDeck[(computerChoice-1)]);
+			appendItem(computerDeck, sizeComputerDeck, playerDeck[computerChoice-1]);
+			removeItemByIndex(playerDeck, sizePlayerDeck, computerChoice);
 			removePairs(computerDeck, sizeComputerDeck);
 			waitForUserInput();
 		}
