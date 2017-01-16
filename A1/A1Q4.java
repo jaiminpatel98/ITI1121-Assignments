@@ -220,9 +220,11 @@ public class A1Q4{
 	private static void dealCards(){
 		for (int i=0; i<deck.length; i++) {
 			if (i%2==0) {
+				System.out.println("" + sizePlayerDeck + "" + playerDeck.length + "");
 				appendItem(playerDeck, sizePlayerDeck, deck[i]);
 			}
 			else {
+				System.out.println("" + sizeComputerDeck + "" + computerDeck.length + "");
 				appendItem(computerDeck, sizeComputerDeck, deck[i]);
 			}
 		}
@@ -383,6 +385,7 @@ public class A1Q4{
 			else {
 				System.out.println("I chose your " + computerChoice + "th card");
 			}
+			System.out.println("" + sizeComputerDeck + "" + computerDeck.length + "");
 			appendItem(computerDeck, sizeComputerDeck, playerDeck[computerChoice-1]);
 			removeItemByIndex(playerDeck, sizePlayerDeck, computerChoice);
 			removePairs(computerDeck, sizeComputerDeck);
