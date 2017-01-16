@@ -323,9 +323,12 @@ public class A1Q4{
 		printArray(playerDeck, sizePlayerDeck);
 		System.out.println("Do not worry. I cannot see the order of your cards.");
 		System.out.println("Now discard all the pairs from your deck. I will do the same.");
+
 		waitForUserInput();
+
 		removePairs(playerDeck, sizePlayerDeck);
 		removePairs(computerDeck, sizeComputerDeck);
+
 		while (true) {
 			if (sizePlayerDeck == 0) {
 				System.out.println("Congratulations! You beat me at Old Maid.");
@@ -335,18 +338,25 @@ public class A1Q4{
 				print("That is unfortunate for you! I beat you at Old Maid.");
 				flag = false;
 			}
+
 			System.out.println("*********************");
 			System.out.println("Your turn");
 			System.out.println("Your new hand is: ");
+
 			printArray(playerDeck, sizePlayerDeck);
+
 			System.out.println("I have " + sizeComputerDeck + " cards. If 1 represents my first card and " + sizeComputerDeck + " represents my last card,");
 			System.out.println("which of my cards do you choose?");
-			getValidInput();
-			System.out.println("The card you chose is " + computerDeck[userin-1]);
+
+			int userin=getValidInput();
+
+			System.out.println("The card you chose is " + computerDeck[(userin-1)]);
 			System.out.println("With " + computerDeck[userin-1] + " added to your hand, your current hand is: ");
+
 			appendItem(playerDeck, sizePlayerDeck, computerDeck[userin-1]);
-			removeItemByIndex(computerDeck, sizeComputerDeck, computerDeck[userin-1]);
+			removeItemByIndex(computerDeck, sizeComputerDeck, computerDeck[(userin-1)]);
 			printArray(playerDeck, sizePlayerDeck);
+
 			System.out.println("After discarding pairs and shuffling, your hand is: ");
 			removePairs(playerDeck, sizePlayerDeck);
 			printArray(playerDeck, sizePlayerDeck);
@@ -369,8 +379,8 @@ public class A1Q4{
 			else {
 				System.out.println("I chose your " + computerChoice + "th card");
 			}
-			appendItem(computerDeck, sizeComputerDeck, playerDeck[computerChoice-1]);
-			removeItemByIndex(playerDeck, sizePlayerDeck, playerDeck[computerChoice-1]);
+			appendItem(computerDeck, sizeComputerDeck, playerDeck[(computerChoice-1)]);
+			removeItemByIndex(playerDeck, sizePlayerDeck, playerDeck[(computerChoice-1)]);
 			removePairs(computerDeck, sizeComputerDeck);
 			waitForUserInput();
 		}
