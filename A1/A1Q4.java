@@ -245,31 +245,31 @@ public class A1Q4{
 		for(int i=0; i<currentSize; i++)
 		{
 			String firstCard=deckOfCards[i];
-			int firstNumber;
+			String firstNumber;
 			if(firstCard.length()==7)
 			{
-				firstNumber=Integer.parseInt(firstCard.substring(0,2));
+				firstNumber=(firstCard.substring(0,2));
 			}
 			else
 			{
-				firstNumber=Integer.parseInt(firstCard.substring(0,1));
+				firstNumber=(firstCard.substring(0,1));
 			}
 			for(int j=i; j<currentSize; j++)
 			{
 				String secondCard=deckOfCards[j];
-				int secondNumber;
+				String secondNumber;
 				if(secondCard.length()==7)
 				{
-					secondNumber=Integer.parseInt(secondCard.substring(0,2));
+					secondNumber=(secondCard.substring(0,2));
 				}
 				else
 				{
-					secondNumber=Integer.parseInt(secondCard.substring(0,1));
+					secondNumber=(secondCard.substring(0,1));
 				}
 				if(firstNumber==secondNumber)
 				{
-					removeItemByIndex(deckOfCards, currentSize, j);
-					removeItemByIndex(deckOfCards, currentSize, i);
+					currentSize=removeItemByIndex(deckOfCards, currentSize, j);
+					currentSize=removeItemByIndex(deckOfCards, currentSize, i);
 				}
 			}
 		}
