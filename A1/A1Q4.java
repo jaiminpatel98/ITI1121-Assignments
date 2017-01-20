@@ -242,38 +242,61 @@ public class A1Q4{
 	private static int removePairs(String[] deckOfCards, int currentSize){
 	
 // REPLACE THE BODY OF THIS METHOD WITH YOUR OWN IMPLEMENTATION
-		for(int i=0; i<currentSize; i++)
-		{
-			String firstCard=deckOfCards[i];
-			String firstNumber;
-			if(firstCard.length()==7)
-			{
-				firstNumber=(firstCard.substring(0,2));
-			}
-			else
-			{
-				firstNumber=(firstCard.substring(0,1));
-			}
-			for(int j=i; j<currentSize; j++)
-			{
-				String secondCard=deckOfCards[j];
-				String secondNumber;
-				if(secondCard.length()==7)
-				{
-					secondNumber=(secondCard.substring(0,2));
+		// for(int i=0; i<currentSize; i++)
+		// {
+		// 	String firstCard=deckOfCards[i];
+		// 	String firstNumber;
+		// 	if(firstCard.length()==7)
+		// 	{
+		// 		firstNumber=(firstCard.substring(0,2));
+		// 	}
+		// 	else
+		// 	{
+		// 		firstNumber=(firstCard.substring(0,1));
+		// 	}
+		// 	for(int j=i; j<currentSize; j++)
+		// 	{
+		// 		String secondCard=deckOfCards[j];
+		// 		String secondNumber;
+		// 		if(secondCard.length()==7)
+		// 		{
+		// 			secondNumber=(secondCard.substring(0,2));
+		// 		}
+		// 		else
+		// 		{
+		// 			secondNumber=(secondCard.substring(0,1));
+		// 		}
+		// 		if(firstNumber==secondNumber)
+		// 		{
+		// 			currentSize=removeItemByIndex(deckOfCards, currentSize, j);
+		// 			currentSize=removeItemByIndex(deckOfCards, currentSize, i);
+		// 		}
+		// 	}
+		// }
+		sortArray(deckOfCards, currentSize);
+		int i = 0;
+		int rank1 = 0;
+		int rank2 = 0;
+		while (i<currentSize-1) {
+			if ((deckOfCards[i].substring(0,1) && deckOfCards[i+1].substring(0,1)) != ('A' || 'K' || 'Q' || 'J')) {
+				rank1 = Integer.parseInt(deckOfCards[i].substring(0,1));
+				rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,1));
+				if (rank1 == rank2) {
+					removeItemByIndex(deckOfCards, currentSize, i);
+					removeItemByIndex(deckOfCards,currentSize, i+1);
 				}
-				else
-				{
-					secondNumber=(secondCard.substring(0,1));
-				}
-				if(firstNumber==secondNumber)
-				{
-					currentSize=removeItemByIndex(deckOfCards, currentSize, j);
-					currentSize=removeItemByIndex(deckOfCards, currentSize, i);
+			}
+			else {
+				if (deckOfCards[i].substring(0,1).equals(deckOfCards[i+1].substring(0,1))) {
+					removeItemByIndex(deckOfCards, currentSize, i);
+					removeItemByIndex(deckOfCards, currentSize, i+1);
 				}
 			}
+			i++;
 		}
-		return currentSize;
+		shuffleArray(deckOfCards, currentSize);
+
+		return currentSize;	
 
 	}
 
@@ -361,6 +384,7 @@ public class A1Q4{
 
 			System.out.println("After discarding pairs and shuffling, your hand is: ");
 			removePairs(playerDeck, sizePlayerDeck);
+			shuffleArray(playerDeck, sizePlayerDeck);
 			printArray(playerDeck, sizePlayerDeck);
 
 			waitForUserInput();
@@ -383,10 +407,11 @@ public class A1Q4{
 			else {
 				System.out.println("I chose your " + computerChoice + "th card");
 			}
-			System.out.println("" + sizeComputerDeck + "" + computerDeck.length + "");
+
 			appendItem(computerDeck, sizeComputerDeck, playerDeck[computerChoice-1]);
 			removeItemByIndex(playerDeck, sizePlayerDeck, computerChoice);
 			removePairs(computerDeck, sizeComputerDeck);
+			shuffleArray(computerDeck, sizeComputerDeck);
 			waitForUserInput();
 		}
 
@@ -402,7 +427,7 @@ public class A1Q4{
 
  
 	public static void main(String[] args){
-	
+
 		A1Q4 game = new A1Q4();		
 
 		game.playGame();
