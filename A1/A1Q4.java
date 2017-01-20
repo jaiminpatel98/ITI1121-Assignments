@@ -278,7 +278,7 @@ public class A1Q4{
 		int rank1 = 0;
 		int rank2 = 0;
 		while (i<currentSize-1) {
-			if ((deckOfCards[i].substring(0,1) && deckOfCards[i+1].substring(0,1)) != ('A' || 'K' || 'Q' || 'J')) {
+			if (deckOfCards[i].substring(0,1) !="A" && deckOfCards[i].substring(0,1) !="K" && deckOfCards[i].substring(0,1) !="Q" && deckOfCards[i].substring(0,1) !="J" && deckOfCards[i+1].substring(0,1) !="A" && deckOfCards[i+1].substring(0,1) !="K" && deckOfCards[i+1].substring(0,1) !="Q" && deckOfCards[i+1].substring(0,1) !="J") {
 				rank1 = Integer.parseInt(deckOfCards[i].substring(0,1));
 				rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,1));
 				if (rank1 == rank2) {
