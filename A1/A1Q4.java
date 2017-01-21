@@ -330,7 +330,9 @@ public class A1Q4{
 			}
 			else {
 				System.out.println("Invalid answer. Give me an integer between 1 and " + sizeComputerDeck + ": ");
-				flag = true;
+
+				System.out.println("Please a number between 1 and " + sizeComputerDeck);
+				userin = sc.nextInt();
 			}
 		}
 	
