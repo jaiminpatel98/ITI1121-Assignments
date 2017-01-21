@@ -353,8 +353,8 @@ public class A1Q4{
 
 		waitForUserInput();
 
-		removePairs(playerDeck, sizePlayerDeck);
-		removePairs(computerDeck, sizeComputerDeck);
+		sizePlayerDeck=removePairs(playerDeck, sizePlayerDeck);
+		sizeComputerDeck=removePairs(computerDeck, sizeComputerDeck);
 
 		while (true) {
 			if (sizePlayerDeck == 0) {
@@ -381,11 +381,11 @@ public class A1Q4{
 			System.out.println("With " + computerDeck[userin-1] + " added to your hand, your current hand is: ");
 
 			appendItem(playerDeck, sizePlayerDeck, computerDeck[userin-1]);
-			removeItemByIndex(computerDeck, sizeComputerDeck, userin);
+			sizeComputerDeck=removeItemByIndex(computerDeck, sizeComputerDeck, userin);
 			printArray(playerDeck, sizePlayerDeck);
 
 			System.out.println("After discarding pairs and shuffling, your hand is: ");
-			removePairs(playerDeck, sizePlayerDeck);
+			sizePlayerDeck=removePairs(playerDeck, sizePlayerDeck);
 			shuffleArray(playerDeck, sizePlayerDeck);
 			printArray(playerDeck, sizePlayerDeck);
 
@@ -411,8 +411,8 @@ public class A1Q4{
 			}
 
 			appendItem(computerDeck, sizeComputerDeck, playerDeck[computerChoice-1]);
-			removeItemByIndex(playerDeck, sizePlayerDeck, computerChoice);
-			removePairs(computerDeck, sizeComputerDeck);
+			sizePlayerDeck=removeItemByIndex(playerDeck, sizePlayerDeck, computerChoice);
+			sizeComputerDeck=removePairs(computerDeck, sizeComputerDeck);
 			shuffleArray(computerDeck, sizeComputerDeck);
 			waitForUserInput();
 		}
