@@ -241,45 +241,13 @@ public class A1Q4{
     */
 	private static int removePairs(String[] deckOfCards, int currentSize){
 	
-// REPLACE THE BODY OF THIS METHOD WITH YOUR OWN IMPLEMENTATION
-		// for(int i=0; i<currentSize; i++)
-		// {
-		// 	String firstCard=deckOfCards[i];
-		// 	String firstNumber;
-		// 	if(firstCard.length()==7)
-		// 	{
-		// 		firstNumber=(firstCard.substring(0,2));
-		// 	}
-		// 	else
-		// 	{
-		// 		firstNumber=(firstCard.substring(0,1));
-		// 	}
-		// 	for(int j=i; j<currentSize; j++)
-		// 	{
-		// 		String secondCard=deckOfCards[j];
-		// 		String secondNumber;
-		// 		if(secondCard.length()==7)
-		// 		{
-		// 			secondNumber=(secondCard.substring(0,2));
-		// 		}
-		// 		else
-		// 		{
-		// 			secondNumber=(secondCard.substring(0,1));
-		// 		}
-		// 		if(firstNumber==secondNumber)
-		// 		{
-		// 			currentSize=removeItemByIndex(deckOfCards, currentSize, j);
-		// 			currentSize=removeItemByIndex(deckOfCards, currentSize, i);
-		// 		}
-		// 	}
-		// }
+
 		sortArray(deckOfCards, currentSize);
 		int i = 0;
 		int rank1 = 0;
 		int rank2 = 0;
 		while (i<currentSize-2) {
-			System.out.println("Current Size: " + currentSize);
-			System.out.println("Index: " + i + " ||| Card: " + deckOfCards[i] + "");
+
 			if (deckOfCards[i].substring(0,1).equals("A") == false && deckOfCards[i].substring(0,1).equals("K") == false && deckOfCards[i].substring(0,1).equals("Q") == false && deckOfCards[i].substring(0,1).equals("J") == false && deckOfCards[i+1].substring(0,1).equals("A") == false && deckOfCards[i+1].substring(0,1).equals("K") == false && deckOfCards[i+1].substring(0,1).equals("Q") == false && deckOfCards[i+1].substring(0,1).equals("J") == false) {
 				rank1 = Integer.parseInt(deckOfCards[i].substring(0,1));
 				rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,1));
@@ -309,7 +277,7 @@ public class A1Q4{
 	*  @return the valid input.
 	*/
 	private static int getValidInput(){
-		System.out.println("Please a number between 1 and " + sizeComputerDeck);
+		System.out.println("Please pick a number between 1 and " + sizeComputerDeck);
 		int userin = sc.nextInt();
 		boolean flag = true;
 		while (true) {
@@ -348,10 +316,14 @@ public class A1Q4{
 		boolean flag = true;
 		System.out.println("Hello. My name is Robot and I am the dealer.");
 		System.out.println("Welcome to my card game!");
+		System.out.println("Press Enter to continue");
+		waitForUserInput();
 		System.out.println("Your current deck of cards is: ");
 		printArray(playerDeck, sizePlayerDeck);
 		System.out.println("Do not worry. I cannot see the order of your cards.");
 		System.out.println("Now discard all the pairs from your deck. I will do the same.");
+		System.out.println("Press Enter to continue");
+
 
 		waitForUserInput();
 
