@@ -284,14 +284,14 @@ public class A1Q4{
 				rank1 = Integer.parseInt(deckOfCards[i].substring(0,1));
 				rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,1));
 				if (rank1 == rank2) {
-					removeItemByIndex(deckOfCards, currentSize, i);
-					removeItemByIndex(deckOfCards,currentSize, i+1);
+					currentSize=removeItemByIndex(deckOfCards, currentSize, i);
+					currentSize=removeItemByIndex(deckOfCards,currentSize, i+1);
 				}
 			}
 			else {
 				if (deckOfCards[i].substring(0,1).equals(deckOfCards[i+1].substring(0,1))) {
-					removeItemByIndex(deckOfCards, currentSize, i);
-					removeItemByIndex(deckOfCards, currentSize, i+1);
+					currentSize=removeItemByIndex(deckOfCards, currentSize, i);
+					currentSize=removeItemByIndex(deckOfCards, currentSize, i+1);
 				}
 			}
 			i++;
