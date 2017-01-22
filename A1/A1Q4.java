@@ -278,10 +278,6 @@ public class A1Q4{
 		int rank1 = 0;
 		int rank2 = 0;
 		while (i<currentSize-1) {
-			System.out.println("================================\n");
-			System.out.println("Current Size is: " + currentSize);
-			System.out.println("Next two Cards Are:");
-			System.out.print("" + deckOfCards[i]+ " and " + deckOfCards[i+1]);
 			if (deckOfCards[i].substring(0,1).equals("A") == false && deckOfCards[i].substring(0,1).equals("K") == false && deckOfCards[i].substring(0,1).equals("Q") == false && deckOfCards[i].substring(0,1).equals("J") == false && deckOfCards[i+1].substring(0,1).equals("A") == false && deckOfCards[i+1].substring(0,1).equals("K") == false && deckOfCards[i+1].substring(0,1).equals("Q") == false && deckOfCards[i+1].substring(0,1).equals("J") == false) {
 				rank1 = Integer.parseInt(deckOfCards[i].substring(0,1));
 				rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,1));
