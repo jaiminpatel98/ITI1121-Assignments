@@ -278,8 +278,10 @@ public class A1Q4{
 		int rank1 = 0;
 		int rank2 = 0;
 		while (i<currentSize-1) {
-			System.out.println("Current Size: " + currentSize);
-			System.out.println("Index: " + i + " ||| Card: " + deckOfCards[i] + "");
+			System.out.println("================================\n");
+			System.out.println("Current Size is: " + currentSize);
+			System.out.println("Next two Cards Are:");
+			System.out.print("" + deckOfCards[i]+ " and " + deckOfCards[i+1]);
 			if (deckOfCards[i].substring(0,1).equals("A") == false && deckOfCards[i].substring(0,1).equals("K") == false && deckOfCards[i].substring(0,1).equals("Q") == false && deckOfCards[i].substring(0,1).equals("J") == false && deckOfCards[i+1].substring(0,1).equals("A") == false && deckOfCards[i+1].substring(0,1).equals("K") == false && deckOfCards[i+1].substring(0,1).equals("Q") == false && deckOfCards[i+1].substring(0,1).equals("J") == false) {
 				rank1 = Integer.parseInt(deckOfCards[i].substring(0,1));
 				rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,1));
@@ -381,14 +383,23 @@ public class A1Q4{
 			System.out.println("With " + computerDeck[userin-1] + " added to your hand, your current hand is: ");
 
 			appendItem(playerDeck, sizePlayerDeck, computerDeck[userin-1]);
-			sizeComputerDeck=removeItemByIndex(computerDeck, sizeComputerDeck, userin);
+			sizeComputerDeck=removeItemByIndex(computerDeck, sizeComputerDeck, userin-1);
 			printArray(playerDeck, sizePlayerDeck);
 
 			System.out.println("After discarding pairs and shuffling, your hand is: ");
 			sizePlayerDeck=removePairs(playerDeck, sizePlayerDeck);
 			shuffleArray(playerDeck, sizePlayerDeck);
 			printArray(playerDeck, sizePlayerDeck);
-
+			if (sizePlayerDeck == 0) {
+				System.out.println("Congratulations! You beat me at Old Maid.");
+				flag = false;
+				break; 
+			}
+			else if (sizeComputerDeck == 0) {
+				System.out.println("That is unfortunate for you! I beat you at Old Maid.");
+				flag = false;
+				break;
+			}
 			waitForUserInput();
 
 			System.out.println("*********************");
@@ -411,7 +422,7 @@ public class A1Q4{
 			}
 
 			appendItem(computerDeck, sizeComputerDeck, playerDeck[computerChoice-1]);
-			sizePlayerDeckremoveItemByIndex(playerDeck, sizePlayerDeck, computerChoice);
+			sizePlayerDeck=removeItemByIndex(playerDeck, sizePlayerDeck, computerChoice-1);
 			sizeComputerDeck=removePairs(computerDeck, sizeComputerDeck);
 			shuffleArray(computerDeck, sizeComputerDeck);
 			waitForUserInput();
