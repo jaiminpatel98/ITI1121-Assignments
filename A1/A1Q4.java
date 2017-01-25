@@ -279,11 +279,21 @@ public class A1Q4{
 		int rank2 = 0;
 		while (i<currentSize-1) {
 			if (deckOfCards[i].substring(0,1).equals("A") == false && deckOfCards[i].substring(0,1).equals("K") == false && deckOfCards[i].substring(0,1).equals("Q") == false && deckOfCards[i].substring(0,1).equals("J") == false && deckOfCards[i+1].substring(0,1).equals("A") == false && deckOfCards[i+1].substring(0,1).equals("K") == false && deckOfCards[i+1].substring(0,1).equals("Q") == false && deckOfCards[i+1].substring(0,1).equals("J") == false) {
-				rank1 = Integer.parseInt(deckOfCards[i].substring(0,1));
-				rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,1));
-				if (rank1 == rank2) {
-					currentSize=removeItemByIndex(deckOfCards, currentSize, i);
-					currentSize=removeItemByIndex(deckOfCards,currentSize, i+1);
+				if (deckOfCards[i].substring(0,2).equals("10") == false || deckOfCards[i+1].substring(0,2).equals("10") == false) {
+					rank1 = Integer.parseInt(deckOfCards[i].substring(0,1));
+					rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,1));
+					if (rank1 == rank2) {
+						currentSize=removeItemByIndex(deckOfCards, currentSize, i);
+						currentSize=removeItemByIndex(deckOfCards,currentSize, i+1);
+					}
+				}
+				else {
+					rank1 = Integer.parseInt(deckOfCards[i].substring(0,2));
+					rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,2));
+					if (rank1 == rank2) {
+						currentSize = removeItemByIndex(deckOfCards, currentSize, i);
+						currentSize = removeItemByIndex(deckOfCards, currentSize, i+1);
+					}
 				}
 			}
 			else {
@@ -328,6 +338,7 @@ public class A1Q4{
 			}
 			else {
 				System.out.println("Invalid answer. Give me an integer between 1 and " + sizeComputerDeck + ": ");
+				userin = sc.nextInt();
 				flag = true;
 			}
 		}
@@ -358,70 +369,75 @@ public class A1Q4{
 			if (sizePlayerDeck == 0) {
 				System.out.println("Congratulations! You beat me at Old Maid.");
 				flag = false; 
-			}
-			else if (sizeComputerDeck == 0) {
-				System.out.println("That is unfortunate for you! I beat you at Old Maid.");
-				flag = false;
-			}
-
-			System.out.println("*********************");
-			System.out.println("Your turn");
-			System.out.println("Your new hand is: ");
-
-			printArray(playerDeck, sizePlayerDeck);
-
-			System.out.println("I have " + sizeComputerDeck + " cards. If 1 represents my first card and " + sizeComputerDeck + " represents my last card,");
-			System.out.println("which of my cards do you choose?");
-
-			int userin=getValidInput();
-
-			System.out.println("The card you chose is " + computerDeck[(userin-1)]);
-			System.out.println("With " + computerDeck[userin-1] + " added to your hand, your current hand is: ");
-
-			appendItem(playerDeck, sizePlayerDeck, computerDeck[userin-1]);
-			sizeComputerDeck=removeItemByIndex(computerDeck, sizeComputerDeck, userin-1);
-			printArray(playerDeck, sizePlayerDeck);
-
-			System.out.println("After discarding pairs and shuffling, your hand is: ");
-			sizePlayerDeck=removePairs(playerDeck, sizePlayerDeck);
-			shuffleArray(playerDeck, sizePlayerDeck);
-			printArray(playerDeck, sizePlayerDeck);
-			if (sizePlayerDeck == 0) {
-				System.out.println("Congratulations! You beat me at Old Maid.");
-				flag = false;
-				break; 
+				break;
 			}
 			else if (sizeComputerDeck == 0) {
 				System.out.println("That is unfortunate for you! I beat you at Old Maid.");
 				flag = false;
 				break;
 			}
-			waitForUserInput();
-
-			System.out.println("*********************");
-			System.out.println("My turn");
-
-			Random rand = new Random();
-			int computerChoice = rand.nextInt((sizePlayerDeck-1) + 1)+1;
-
-			if (computerChoice == 1) {
-				System.out.println("I chose your 1st card");
-			}
-			else if (computerChoice == 2) {
-				System.out.println("I chose your 2nd card");
-			}
-			else if (computerChoice == 3) {
-				System.out.println("I chose you 3rd card");
-			}
 			else {
-				System.out.println("I chose your " + computerChoice + "th card");
-			}
+				System.out.println("*********************");
+				System.out.println("Your turn");
+				System.out.println("Your current hand is: ");
 
-			appendItem(computerDeck, sizeComputerDeck, playerDeck[computerChoice-1]);
-			sizePlayerDeck=removeItemByIndex(playerDeck, sizePlayerDeck, computerChoice-1);
-			sizeComputerDeck=removePairs(computerDeck, sizeComputerDeck);
-			shuffleArray(computerDeck, sizeComputerDeck);
-			waitForUserInput();
+				printArray(playerDeck, sizePlayerDeck);
+
+				System.out.println("I have " + sizeComputerDeck + " cards. If 1 represents my first card and " + sizeComputerDeck + " represents my last card,");
+				System.out.println("which of my cards do you choose?");
+
+				int userin=getValidInput();
+
+				System.out.println("The card you chose is " + computerDeck[userin-1]);
+
+				sizePlayerDeck=appendItem(playerDeck, sizePlayerDeck, computerDeck[userin-1]);
+
+				System.out.println("With " + computerDeck[userin-1] + " added to your hand, your current hand is: ");
+
+				sizeComputerDeck=removeItemByIndex(computerDeck, sizeComputerDeck, userin-1);
+				printArray(playerDeck, sizePlayerDeck);
+				sizePlayerDeck=removePairs(playerDeck, sizePlayerDeck);
+
+				System.out.println("After discarding pairs and shuffling, your hand is: ");
+				
+				printArray(playerDeck, sizePlayerDeck);
+			// }
+			// if (sizePlayerDeck == 0) {
+			// 	System.out.println("Congratulations! You beat me at Old Maid.");
+			// 	flag = false;
+			// 	break; 
+			// }
+			// else if (sizeComputerDeck == 0) {
+			// 	System.out.println("That is unfortunate for you! I beat you at Old Maid.");
+			// 	flag = false;
+			// 	break;
+			// }
+			// else {
+				waitForUserInput();
+				System.out.println("*********************");
+				System.out.println("My turn");
+
+				Random rand = new Random();
+				int computerChoice = rand.nextInt((sizePlayerDeck-1) + 1)+1;
+				System.out.println(computerChoice);
+				if (computerChoice == 1) {
+					System.out.println("I chose your 1st card");
+				}
+				else if (computerChoice == 2) {
+					System.out.println("I chose your 2nd card");
+				}
+				else if (computerChoice == 3) {
+					System.out.println("I chose you 3rd card");
+				}
+				else {
+					System.out.println("I chose your " + computerChoice + "th card");
+				}
+
+				sizeComputerDeck=appendItem(computerDeck, sizeComputerDeck, playerDeck[computerChoice-1]);
+				sizePlayerDeck=removeItemByIndex(playerDeck, sizePlayerDeck, computerChoice-1);
+				sizeComputerDeck=removePairs(computerDeck, sizeComputerDeck);
+				waitForUserInput();
+			}
 		}
 
 
