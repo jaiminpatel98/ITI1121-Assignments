@@ -396,7 +396,6 @@ public class A1Q4{
 
 				Random rand = new Random();
 				int computerChoice = rand.nextInt((sizePlayerDeck-1) + 1)+1;
-				System.out.println(computerChoice);
 				if (computerChoice == 1) {
 					System.out.println("I chose your 1st card");
 				}
