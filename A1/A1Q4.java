@@ -152,7 +152,7 @@ public class A1Q4{
 	/**
 	* Array used to store the player's deck of cards
 	*/
-	private static String[] playerDeck = new String [25];
+	private static String[] playerDeck = new String [26];
 
 	/**
 	* The current number of cards in the player's deck of cards
@@ -162,7 +162,7 @@ public class A1Q4{
 	/**
 	* Array used to store the computer's deck of cards
 	*/
-	private static String[] computerDeck = new String [26];
+	private static String[] computerDeck = new String [25];
 
 	/**
 	* The current number of cards in the computer's deck of cards
@@ -240,39 +240,6 @@ public class A1Q4{
     *   @return the number of cards in deckOfCards once the pair are removed
     */
 	private static int removePairs(String[] deckOfCards, int currentSize){
-	
-// REPLACE THE BODY OF THIS METHOD WITH YOUR OWN IMPLEMENTATION
-		// for(int i=0; i<currentSize; i++)
-		// {
-		// 	String firstCard=deckOfCards[i];
-		// 	String firstNumber;
-		// 	if(firstCard.length()==7)
-		// 	{
-		// 		firstNumber=(firstCard.substring(0,2));
-		// 	}
-		// 	else
-		// 	{
-		// 		firstNumber=(firstCard.substring(0,1));
-		// 	}
-		// 	for(int j=i; j<currentSize; j++)
-		// 	{
-		// 		String secondCard=deckOfCards[j];
-		// 		String secondNumber;
-		// 		if(secondCard.length()==7)
-		// 		{
-		// 			secondNumber=(secondCard.substring(0,2));
-		// 		}
-		// 		else
-		// 		{
-		// 			secondNumber=(secondCard.substring(0,1));
-		// 		}
-		// 		if(firstNumber==secondNumber)
-		// 		{
-		// 			currentSize=removeItemByIndex(deckOfCards, currentSize, j);
-		// 			currentSize=removeItemByIndex(deckOfCards, currentSize, i);
-		// 		}
-		// 	}
-		// }
 		sortArray(deckOfCards, currentSize);
 		int i = 0;
 		int rank1 = 0;
@@ -284,25 +251,37 @@ public class A1Q4{
 					rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,1));
 					if (rank1 == rank2) {
 						currentSize=removeItemByIndex(deckOfCards, currentSize, i);
-						currentSize=removeItemByIndex(deckOfCards,currentSize, i+1);
+						currentSize=removeItemByIndex(deckOfCards,currentSize, i);
+					}
+					else
+					{
+						i++;
 					}
 				}
 				else {
 					rank1 = Integer.parseInt(deckOfCards[i].substring(0,2));
 					rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,2));
 					if (rank1 == rank2) {
-						currentSize = removeItemByIndex(deckOfCards, currentSize, i);
-						currentSize = removeItemByIndex(deckOfCards, currentSize, i+1);
+						currentSize=removeItemByIndex(deckOfCards, currentSize, i);
+						currentSize=removeItemByIndex(deckOfCards,currentSize, i);
+					}
+					else
+					{
+						i++;
 					}
 				}
 			}
-			else {
-				if (deckOfCards[i].substring(0,1).equals(deckOfCards[i+1].substring(0,1))) {
+			else if (deckOfCards[i].substring(0,1).equals(deckOfCards[i+1].substring(0,1))) 
+			{
 					currentSize=removeItemByIndex(deckOfCards, currentSize, i);
-					currentSize=removeItemByIndex(deckOfCards, currentSize, i+1);
-				}
+					currentSize=removeItemByIndex(deckOfCards,currentSize, i);
+
 			}
-			i++;
+			else
+			{
+				i++;
+			}
+			
 		}
 		shuffleArray(deckOfCards, currentSize);
 
@@ -397,22 +376,20 @@ public class A1Q4{
 				sizeComputerDeck=removeItemByIndex(computerDeck, sizeComputerDeck, userin-1);
 				printArray(playerDeck, sizePlayerDeck);
 				sizePlayerDeck=removePairs(playerDeck, sizePlayerDeck);
+				if (sizePlayerDeck == 0) {
+					System.out.println("Congratulations! You beat me at Old Maid.");
+					flag = false; 
+					break;
+				}
+				else if (sizeComputerDeck == 0) {
+					System.out.println("That is unfortunate for you! I beat you at Old Maid.");
+					flag = false;
+					break;
+				}
 
 				System.out.println("After discarding pairs and shuffling, your hand is: ");
 				
 				printArray(playerDeck, sizePlayerDeck);
-			// }
-			// if (sizePlayerDeck == 0) {
-			// 	System.out.println("Congratulations! You beat me at Old Maid.");
-			// 	flag = false;
-			// 	break; 
-			// }
-			// else if (sizeComputerDeck == 0) {
-			// 	System.out.println("That is unfortunate for you! I beat you at Old Maid.");
-			// 	flag = false;
-			// 	break;
-			// }
-			// else {
 				waitForUserInput();
 				System.out.println("*********************");
 				System.out.println("My turn");
