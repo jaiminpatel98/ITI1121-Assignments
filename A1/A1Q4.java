@@ -192,14 +192,14 @@ public class A1Q4{
 
 
 
-		String[] suits = {"\u2660", "\u2661", "\u2662", "\u2663"};
+		String[] suits = {"♥", "♠", "♦", "♣"};
 		String[] ranks = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
 		sizeDeck = suits.length*ranks.length - 1;
 		deck = new String[sizeDeck];
 		int index = 0;
 		for(int i =0 ; i < ranks.length; i++){
 			for(int j =0 ; j < suits.length; j++){
-				if(!(ranks[i]=="Q" && suits[j]=="\u2663")){
+				if(!(ranks[i]=="Q" && suits[j]=="♥")){
 					deck[index++]= ranks[i] + " of " + suits[j];
 				}
 			}
