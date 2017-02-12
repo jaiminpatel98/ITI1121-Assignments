@@ -9,7 +9,11 @@ import java.util.Random;
  * given in ITI1020
  *
  * @author gvj (gvj@eecs.uottawa.ca)
- *
+ * 
+ *Authors for this iteration: Sam Worrod (8653389) and Jaimin Patel (8721083)
+ *Course: ITI 1121 A
+ *Assignment 1
+ *Question: 4
  */
 
 public class A1Q4{
@@ -192,15 +196,15 @@ public class A1Q4{
 
 
 
-		String[] suits = {"\u2660", "\u2661", "\u2662", "\u2663"};
-		String[] ranks = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
-		sizeDeck = suits.length*ranks.length - 1;
-		deck = new String[sizeDeck];
-		int index = 0;
-		for(int i =0 ; i < ranks.length; i++){
-			for(int j =0 ; j < suits.length; j++){
-				if(!(ranks[i]=="Q" && suits[j]=="\u2663")){
-					deck[index++]= ranks[i] + " of " + suits[j];
+		String[] suits = {"♥", "♠", "♦", "♣"};//creation of suits array
+		String[] ranks = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"}; //creation of ranks array
+		sizeDeck = suits.length*ranks.length - 1;//deck is equal to the number of combinations minus the 1 card taken out
+		deck = new String[sizeDeck];//creates array with size 51
+		int index = 0;//starts at 0 and goes through every position
+		for(int i =0 ; i < ranks.length; i++){//nested for loop to go through every combination
+			for(int j =0 ; j < suits.length; j++){//see above
+				if(!(ranks[i]=="Q" && suits[j]=="♥")){//takes out this card
+					deck[index++]= ranks[i] + " of " + suits[j];//adds card to deck
 				}
 			}
 		}
@@ -210,7 +214,7 @@ public class A1Q4{
      * Waits for user input
      */
 	private static void waitForUserInput(){
-		sc.nextLine();
+		sc.nextLine();//waits for user
 	}
 
 	/**
@@ -218,12 +222,12 @@ public class A1Q4{
 	*  into playerDeck and computerDeck, starting with playerDeck
 	*/
 	private static void dealCards(){
-		for (int i=0; i<deck.length; i++) {
-			if (i%2==0) {
-				sizePlayerDeck=appendItem(playerDeck, sizePlayerDeck, deck[i]);
+		for (int i=0; i<deck.length; i++) {//goes through every card in the deck
+			if (i%2==0) {//alternates cards
+				sizePlayerDeck=appendItem(playerDeck, sizePlayerDeck, deck[i]);//adds card to players hand
 			}
 			else {
-				sizeComputerDeck=appendItem(computerDeck, sizeComputerDeck, deck[i]);
+				sizeComputerDeck=appendItem(computerDeck, sizeComputerDeck, deck[i]);//adds cards to computers hand
 			}
 		}
 
@@ -239,53 +243,53 @@ public class A1Q4{
     *			stored from arrayOfStrings[0] to arrayOfStrings[currentSize-1] 
     *   @return the number of cards in deckOfCards once the pair are removed
     */
-	private static int removePairs(String[] deckOfCards, int currentSize){
-		sortArray(deckOfCards, currentSize);
-		int i = 0;
-		int rank1 = 0;
-		int rank2 = 0;
-		while (i<currentSize-1) {
-			if (deckOfCards[i].substring(0,1).equals("A") == false && deckOfCards[i].substring(0,1).equals("K") == false && deckOfCards[i].substring(0,1).equals("Q") == false && deckOfCards[i].substring(0,1).equals("J") == false && deckOfCards[i+1].substring(0,1).equals("A") == false && deckOfCards[i+1].substring(0,1).equals("K") == false && deckOfCards[i+1].substring(0,1).equals("Q") == false && deckOfCards[i+1].substring(0,1).equals("J") == false) {
-				if (deckOfCards[i].substring(0,2).equals("10") == false || deckOfCards[i+1].substring(0,2).equals("10") == false) {
-					rank1 = Integer.parseInt(deckOfCards[i].substring(0,1));
-					rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,1));
-					if (rank1 == rank2) {
-						currentSize=removeItemByIndex(deckOfCards, currentSize, i);
+	private static int removePairs(String[] deckOfCards, int currentSize){ //takes out pairs, takes the cards and the number of cards
+		sortArray(deckOfCards, currentSize); //puts cards in order
+		int i = 0;//current spot in array
+		int rank1 = 0; //values of the cards to be checked
+		int rank2 = 0;//values of the cards to be checked
+		while (i<currentSize-1) {//goes until every card has been checked
+			if (deckOfCards[i].substring(0,1).equals("A") == false && deckOfCards[i].substring(0,1).equals("K") == false && deckOfCards[i].substring(0,1).equals("Q") == false && deckOfCards[i].substring(0,1).equals("J") == false && deckOfCards[i+1].substring(0,1).equals("A") == false && deckOfCards[i+1].substring(0,1).equals("K") == false && deckOfCards[i+1].substring(0,1).equals("Q") == false && deckOfCards[i+1].substring(0,1).equals("J") == false) { //if the card is not a Letter
+				if (deckOfCards[i].substring(0,2).equals("10") == false || deckOfCards[i+1].substring(0,2).equals("10") == false) {//if the card is not the 10 of something
+					rank1 = Integer.parseInt(deckOfCards[i].substring(0,1));//first card
+					rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,1));//second card
+					if (rank1 == rank2) {//if cards are equal
+						currentSize=removeItemByIndex(deckOfCards, currentSize, i); //remove cards
 						currentSize=removeItemByIndex(deckOfCards,currentSize, i);
 					}
 					else
 					{
-						i++;
+						i++;//moves on to the next card
 					}
 				}
 				else {
-					rank1 = Integer.parseInt(deckOfCards[i].substring(0,2));
-					rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,2));
-					if (rank1 == rank2) {
-						currentSize=removeItemByIndex(deckOfCards, currentSize, i);
+					rank1 = Integer.parseInt(deckOfCards[i].substring(0,2)); //first card
+					rank2 = Integer.parseInt(deckOfCards[i+1].substring(0,2));//second card
+					if (rank1 == rank2) {//if cards have the same value
+						currentSize=removeItemByIndex(deckOfCards, currentSize, i);//removes cards
 						currentSize=removeItemByIndex(deckOfCards,currentSize, i);
 					}
 					else
 					{
-						i++;
+						i++;//moves on to the next card
 					}
 				}
 			}
-			else if (deckOfCards[i].substring(0,1).equals(deckOfCards[i+1].substring(0,1))) 
+			else if (deckOfCards[i].substring(0,1).equals(deckOfCards[i+1].substring(0,1))) //if cards have the same value
 			{
-					currentSize=removeItemByIndex(deckOfCards, currentSize, i);
+					currentSize=removeItemByIndex(deckOfCards, currentSize, i);//removes cards
 					currentSize=removeItemByIndex(deckOfCards,currentSize, i);
 
 			}
 			else
 			{
-				i++;
+				i++;///moves on to the next card
 			}
 			
 		}
-		shuffleArray(deckOfCards, currentSize);
+		shuffleArray(deckOfCards, currentSize);//reshuffles hand
 
-		return (currentSize);	
+		return (currentSize);//returns number of cards left
 
 	}
 
@@ -297,10 +301,10 @@ public class A1Q4{
 	*/
 	private static int getValidInput(){
 		System.out.println("Please a number between 1 and " + sizeComputerDeck);
-		int userin = sc.nextInt();
-		boolean flag = true;
-		while (true) {
-			if ((userin>=1) && (userin<=sizeComputerDeck)) {
+		int userin = sc.nextInt(); //gets input, stores as integer
+		boolean flag = true; //runs until correct number given
+		while (true) {//keeps user in loop
+			if ((userin>=1) && (userin<=sizeComputerDeck)) { // if it is a valid number
 				if (userin == 1) {
 					System.out.println("You chose my "+ userin + "st card");
 				}
@@ -313,11 +317,11 @@ public class A1Q4{
 				else {
 					System.out.println("You chose my " + userin + "th card");
 				}
-				return (userin);
+				return (userin); //returns the number the player picked
 			}
-			else {
+			else {//if it is not valid
 				System.out.println("Invalid answer. Give me an integer between 1 and " + sizeComputerDeck + ": ");
-				userin = sc.nextInt();
+				userin = sc.nextInt();//has them pick a new number
 				flag = true;
 			}
 		}
@@ -328,24 +332,24 @@ public class A1Q4{
 	/**
 	*  The actual game, as per the Python implementation
 	*/
-	public static void playGame(){
-		shuffleArray(deck, sizeDeck);
-		dealCards();
-		boolean flag = true;
+	public static void playGame(){ //play game method
+		shuffleArray(deck, sizeDeck); //randomizes cards
+		dealCards(); //distributes cards
+		boolean flag = true;//keeps the game running for multiple rounds
 		System.out.println("Hello. My name is Robot and I am the dealer.");
 		System.out.println("Welcome to my card game!");
 		System.out.println("Your current deck of cards is: ");
-		printArray(playerDeck, sizePlayerDeck);
+		printArray(playerDeck, sizePlayerDeck); //displays player deck
 		System.out.println("Do not worry. I cannot see the order of your cards.");
 		System.out.println("Now discard all the pairs from your deck. I will do the same.");
 
-		waitForUserInput();
+		waitForUserInput();//waits for user
 
-		sizePlayerDeck=removePairs(playerDeck, sizePlayerDeck);
-		sizeComputerDeck=removePairs(computerDeck, sizeComputerDeck);
+		sizePlayerDeck=removePairs(playerDeck, sizePlayerDeck);//takes out pairs from player deck
+		sizeComputerDeck=removePairs(computerDeck, sizeComputerDeck); //takes out pairs from computer deck
 
-		while (true) {
-			if (sizePlayerDeck == 0) {
+		while (true) { //game runs until someone wins
+			if (sizePlayerDeck == 0) { //checks to see if anyone won
 				System.out.println("Congratulations! You beat me at Old Maid.");
 				flag = false; 
 				break;
@@ -360,23 +364,23 @@ public class A1Q4{
 				System.out.println("Your turn");
 				System.out.println("Your current hand is: ");
 
-				printArray(playerDeck, sizePlayerDeck);
+				printArray(playerDeck, sizePlayerDeck); //prints player hand
 
 				System.out.println("I have " + sizeComputerDeck + " cards. If 1 represents my first card and " + sizeComputerDeck + " represents my last card,");
 				System.out.println("which of my cards do you choose?");
 
-				int userin=getValidInput();
+				int userin=getValidInput(); //get input from the uses
 
 				System.out.println("The card you chose is " + computerDeck[userin-1]);
 
-				sizePlayerDeck=appendItem(playerDeck, sizePlayerDeck, computerDeck[userin-1]);
+				sizePlayerDeck=appendItem(playerDeck, sizePlayerDeck, computerDeck[userin-1]); //adds player choice to deck
 
 				System.out.println("With " + computerDeck[userin-1] + " added to your hand, your current hand is: ");
 
-				sizeComputerDeck=removeItemByIndex(computerDeck, sizeComputerDeck, userin-1);
-				printArray(playerDeck, sizePlayerDeck);
-				sizePlayerDeck=removePairs(playerDeck, sizePlayerDeck);
-				if (sizePlayerDeck == 0) {
+				sizeComputerDeck=removeItemByIndex(computerDeck, sizeComputerDeck, userin-1);//takes card from computer deck
+				printArray(playerDeck, sizePlayerDeck); //prints hand after gaining card
+				sizePlayerDeck=removePairs(playerDeck, sizePlayerDeck); //takes out any pairs in the players deck
+				if (sizePlayerDeck == 0) { // checks to see if anyone won
 					System.out.println("Congratulations! You beat me at Old Maid.");
 					flag = false; 
 					break;
@@ -389,14 +393,14 @@ public class A1Q4{
 
 				System.out.println("After discarding pairs and shuffling, your hand is: ");
 				
-				printArray(playerDeck, sizePlayerDeck);
-				waitForUserInput();
+				printArray(playerDeck, sizePlayerDeck); //prints player hand
+				waitForUserInput(); //waits for user
 				System.out.println("*********************");
 				System.out.println("My turn");
 
 				Random rand = new Random();
-				int computerChoice = rand.nextInt((sizePlayerDeck-1) + 1)+1;
-				if (computerChoice == 1) {
+				int computerChoice = rand.nextInt((sizePlayerDeck-1) + 1)+1; //computer picks a card using the random function. Increased by 2 to accurately represent card
+				if (computerChoice == 1) {//different display based on card choice
 					System.out.println("I chose your 1st card");
 				}
 				else if (computerChoice == 2) {
@@ -409,10 +413,10 @@ public class A1Q4{
 					System.out.println("I chose your " + computerChoice + "th card");
 				}
 
-				sizeComputerDeck=appendItem(computerDeck, sizeComputerDeck, playerDeck[computerChoice-1]);
-				sizePlayerDeck=removeItemByIndex(playerDeck, sizePlayerDeck, computerChoice-1);
-				sizeComputerDeck=removePairs(computerDeck, sizeComputerDeck);
-				waitForUserInput();
+				sizeComputerDeck=appendItem(computerDeck, sizeComputerDeck, playerDeck[computerChoice-1]); //adds card to computer deck
+				sizePlayerDeck=removeItemByIndex(playerDeck, sizePlayerDeck, computerChoice-1); //removes card from player deck
+				sizeComputerDeck=removePairs(computerDeck, sizeComputerDeck);//checks for pairs
+				waitForUserInput();//waits for user
 			}
 		}
 
@@ -428,7 +432,7 @@ public class A1Q4{
 
  
 	public static void main(String[] args){
-
+		StudentInfo.display();
 		A1Q4 game = new A1Q4();		
 
 		game.playGame();

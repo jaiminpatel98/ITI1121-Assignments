@@ -5,6 +5,10 @@
  *
  * @author Marcel Turcotte (turcotte@eecs.uottawa.ca)
  *
+ *Authors for this iteration: Sam Worrod (8653389) and Jaimin Patel (8721083)
+ *Course: ITI 1121 A
+ *Assignment 1
+ *Question: 4
  */
 
 
@@ -53,6 +57,7 @@ public class A1Q3 {
  	public static void main(String[] args) {
 
 // REPLACE THE BODY OF THIS METHOD WITH YOUR OWN IMPLEMENTATION
+        StudentInfo.display();
         int[] intargs = new int[args.length];
         for (int i = 0; i < args.length; i++) {
             intargs[i] = Integer.parseInt(args[i]);
