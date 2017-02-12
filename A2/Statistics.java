@@ -12,18 +12,14 @@
  *
  */
 public class Statistics {
-
-// ADD HERE INSTANCE VARIABLES DECLARATION
-
+     int count = 0;
 	/** 
      * Constructor.
      * 
      * @param numberOfRuns the number of experiments that will be run
      */
  	public  Statistics(int numberOfRuns){
-
-// REPLACE THE BODY OF THIS METHOD WITH YOUR OWN IMPLEMENTATION
-
+          int numberOfRuns = numberOfRuns;
 	}
 	
 	/** 
@@ -35,9 +31,11 @@ public class Statistics {
      *   @param value the result of the new experiment
      */
 	public void updateStatistics(int value){
-
-// REPLACE THE BODY OF THIS METHOD WITH YOUR OWN IMPLEMENTATION
-
+          count ++;
+          if (count>numberOfRuns) {
+               System.out.println("Error: You called updateStatistic more times than the number of experiments!");
+          }
+          
 	}
 	
 
