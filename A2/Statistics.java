@@ -13,13 +13,20 @@
  */
 public class Statistics {
      int count = 0;
+     int results[];
+     double avg = 0;
+     double stdv = 0;
+     int min = 0;
+     int max = 9;
+     int runs;
 	/** 
-     * Constructor.
+     * Constructor
      * 
      * @param numberOfRuns the number of experiments that will be run
      */
  	public  Statistics(int numberOfRuns){
-          int numberOfRuns = numberOfRuns;
+          runs = numberOfRuns;
+          results = new int[runs];
 	}
 	
 	/** 
@@ -32,10 +39,22 @@ public class Statistics {
      */
 	public void updateStatistics(int value){
           count ++;
-          if (count>numberOfRuns) {
+          if (count>runs) {
                System.out.println("Error: You called updateStatistic more times than the number of experiments!");
           }
-          
+          results[count-1] = value;
+          average();
+          standardDeviation();
+          min = 10000000;
+          max = -1;
+          for (int i=0; i<runs; i++) {
+               if (results[i] > max) {
+                    max = results[i];
+               }
+               if (results[i] < min) {
+                    min = results[i];
+               }
+          }
 	}
 	
 
@@ -44,9 +63,14 @@ public class Statistics {
      * to the method updateStatistic
      */
 	public double average(){
-
-// REPLACE THE BODY OF THIS METHOD WITH YOUR OWN IMPLEMENTATION
-
+          int sum = 0;
+          for (int i=0; i<runs; i++) {
+               sum += results[i];
+          }
+          avg = (sum/runs)*100;
+          avg = Math.round(avg);
+          avg = avg/100;
+          return (avg);
 	}
 
 
@@ -55,9 +79,19 @@ public class Statistics {
      * to the method updateStatistic
      */
 	public double standardDeviation(){
-
-// REPLACE THE BODY OF THIS METHOD WITH YOUR OWN IMPLEMENTATION
-
+          int summ = 0;
+          double mean = average();
+          double standev[] = new double[runs];
+          for (int i=0; i<runs; i++) {
+               standev[i] = Math.pow((results[i] - mean), 2);
+          }
+          for (int i=0; i<runs; i++) {
+               summ += standev[i];
+          }
+          stdv = Math.sqrt(summ/runs);
+          stdv = Math.round(stdv*100);
+          stdv = stdv*100;
+          return (stdv);
 	}
 
 	/** 
@@ -67,9 +101,8 @@ public class Statistics {
      * digits decimals are shown
      */
 	public String toString(){
-
-// REPLACE THE BODY OF THIS METHOD WITH YOUR OWN IMPLEMENTATION
-
+          String stat = "Stat";
+          return (stat);
 	}
 
 }

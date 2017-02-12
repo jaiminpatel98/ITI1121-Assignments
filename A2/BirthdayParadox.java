@@ -28,22 +28,24 @@ public class BirthdayParadox {
 	 * of the experiment
      */
  	public static Statistics runExperiments(int range, int numberOfRuns){
-          int [] = new int[range];
-          int 
-          int count = 0;
+          Statistics stat = new Statistics(numberOfRuns);
           boolean flag = false;
           for (int i=0; i<numberOfRuns; i++) {
-               for (int k=0; k<n; k++) {
+               int count = 0;
+               int n[] = new int[range];
+               for (int k=0; k<range; k++) {
                     count++;
-                    exp[k] = generator.nextInt((range)+1);
-                    for (j=0; j<k; j++) {
-                         if (exp[k] == exp[j]) {
-                              return (count);
+                    n[k] = generator.nextInt((range)+1);
+                    for (int j=0; j<k; j++) {
+                         if (n[k] == n[j]) {
+                              stat.updateStatistics(count);
+                              break;
                          }
                     }
+                    break;
                }
           }
-          //turn data in a Statistic
+          return (stat);
 	}
 
  	/** 
@@ -66,10 +68,11 @@ public class BirthdayParadox {
                exp[i] = generator.nextInt((range)+1);
                for (int k=0; k<i; k++) {
                     if (exp[i] == exp[k]) {
-                         return (count);
+                         break;
                     }
                }
-          }   
+          }
+          return (count);   
 	}
 	
 
@@ -91,14 +94,14 @@ public class BirthdayParadox {
           int range;
           int numberOfRuns;
           if (args.length == 0) {
-               int range = 365;
-               int numberOfRuns = 50;
+               range = 365;
+               numberOfRuns = 50;
           }
           else {
-               int range = intargs[0];
-               int numberOfRuns = intargs[1];
+               range = intargs[0];
+               numberOfRuns = intargs[1];
           }
-          Statistics x = BirthdayParadox.runExperiments(range, numberOfRuns)
+          Statistics x = BirthdayParadox.runExperiments(range, numberOfRuns);
           System.out.println(x);
 	}
 
