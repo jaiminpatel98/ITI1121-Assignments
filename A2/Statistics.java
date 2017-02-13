@@ -14,10 +14,10 @@
 public class Statistics {
      int count = 0;
      int results[];
-     double avg = 0;
-     double stdv = 0;
-     int min = 0;
-     int max = 9;
+     double avg;
+     double stdv;
+     int min;
+     int max;
      int runs;
 	/** 
      * Constructor
@@ -90,7 +90,7 @@ public class Statistics {
           }
           stdv = Math.sqrt(summ/runs);
           stdv = Math.round(stdv*100);
-          stdv = stdv*100;
+          stdv = stdv/100;
           return (stdv);
 	}
 
@@ -101,7 +101,7 @@ public class Statistics {
      * digits decimals are shown
      */
 	public String toString(){
-          String stat = "Stat";
+          String stat = "We have run " + runs + " experiments\nThe min was: " + min + "\nThe max was: " + max + "\nThe mean was: " + avg + "\nThe standard deviation was: " + stdv + "";
           return (stat);
 	}
 

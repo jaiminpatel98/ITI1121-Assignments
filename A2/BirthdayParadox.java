@@ -29,22 +29,19 @@ public class BirthdayParadox {
      */
  	public static Statistics runExperiments(int range, int numberOfRuns){
           Statistics stat = new Statistics(numberOfRuns);
-          boolean flag = false;
+          
+          int currentCount=0;
           for (int i=0; i<numberOfRuns; i++) {
-               int count = 0;
-               int n[] = new int[range];
-               for (int k=0; k<range; k++) {
-                    count++;
-                    n[k] = generator.nextInt((range)+1);
-                    for (int j=0; j<k; j++) {
-                         if (n[k] == n[j]) {
-                              stat.updateStatistics(count);
-                              break;
-                         }
-                    }
-                    break;
-               }
+               int count=oneRun(range);
+               /*int count = 0;
+               
+               if(flag)
+               {
+                    
+               }*/
+          stat.updateStatistics(count);
           }
+          
           return (stat);
 	}
 
@@ -60,19 +57,20 @@ public class BirthdayParadox {
      */
 	
  	private static int oneRun(int range){
-          int exp[] = new int[range];
-          int count = 0;
-          boolean flag = false;
-          for (int i=0; i<range; i++) {
+          boolean flag=false;
+          int n[] = new int[range];
+          int count=0;
+          for (int k=0; k<range; k++) {
                count++;
-               exp[i] = generator.nextInt((range)+1);
-               for (int k=0; k<i; k++) {
-                    if (exp[i] == exp[k]) {
-                         break;
+               n[k] = generator.nextInt((range)+1);
+               for (int j=0; j<k; j++) {
+                    if (n[k] == n[j]) 
+                    {
+                         return(count);
                     }
                }
           }
-          return (count);   
+          return(count);
 	}
 	
 
