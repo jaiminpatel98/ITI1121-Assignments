@@ -5,7 +5,10 @@
  * the experiments.
  *
  * @author gvj (gvj@eecs.uottawa.ca)
- *
+ *Authors for this iteration: Sam Worrod (8653389) and Jaimin Patel (8721083)
+ *Course: ITI 1121 A
+ *Assignment 2
+ *Question: 1
  */
 
 public class BirthdayParadox {
@@ -33,12 +36,7 @@ public class BirthdayParadox {
           int currentCount=0;
           for (int i=0; i<numberOfRuns; i++) {
                int count=oneRun(range);
-               /*int count = 0;
                
-               if(flag)
-               {
-                    
-               }*/
           stat.updateStatistics(count);
           }
           
@@ -85,6 +83,7 @@ public class BirthdayParadox {
      * the size of the set and the number of runs
      */
 	public static void main(String[] args) {
+          StudentInfo.display();
           int[] intargs = new int[args.length];
           for (int i = 0; i < args.length; i++) {
                intargs[i] = Integer.parseInt(args[i]);
@@ -99,7 +98,7 @@ public class BirthdayParadox {
                range = intargs[0];
                numberOfRuns = intargs[1];
           }
-          Statistics x = BirthdayParadox.runExperiments(range, numberOfRuns);
+          Statistics x = runExperiments(range, numberOfRuns);
           System.out.println(x);
 	}
 
