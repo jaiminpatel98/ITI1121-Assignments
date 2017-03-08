@@ -9,27 +9,30 @@
  * and java arrays.
  *
  * @author gvj (gvj@eecs.uottawa.ca)
- *
+ *Authors for this iteration: Sam Worrod (8653389) and Jaimin Patel (8721083)
+ *Course: ITI 1121 A
+ *Assignment 2
+ *Question: 2
  */
 public class Statistics {
      int count = 0;
      int results[];
-     double avg = 0;
-     double stdv = 0;
-     int min = 0;
-     int max = 9;
+     double avg;
+     double stdv;
+     int min;
+     int max;
      int runs;
-	/** 
+     /** 
      * Constructor
      * 
      * @param numberOfRuns the number of experiments that will be run
      */
- 	public  Statistics(int numberOfRuns){
+     public  Statistics(int numberOfRuns){
           runs = numberOfRuns;
           results = new int[runs];
-	}
-	
-	/** 
+     }
+     
+     /** 
      * Updates statistics after one experiment.
      * This method cannot be called more times than the 
      * paramter that was passed in the constructor. If
@@ -37,7 +40,7 @@ public class Statistics {
      * no change should occur.
      *   @param value the result of the new experiment
      */
-	public void updateStatistics(int value){
+     public void updateStatistics(int value){
           count ++;
           if (count>runs) {
                System.out.println("Error: You called updateStatistic more times than the number of experiments!");
@@ -55,14 +58,14 @@ public class Statistics {
                     min = results[i];
                }
           }
-	}
-	
+     }
+     
 
-	/** 
+     /** 
      *   @return the current average of the values passed
      * to the method updateStatistic
      */
-	public double average(){
+     public double average(){
           int sum = 0;
           for (int i=0; i<runs; i++) {
                sum += results[i];
@@ -71,14 +74,14 @@ public class Statistics {
           avg = Math.round(avg);
           avg = avg/100;
           return (avg);
-	}
+     }
 
 
-	/** 
+     /** 
      *   @return the current standard deviation of the values passed
      * to the method updateStatistic
      */
-	public double standardDeviation(){
+     public double standardDeviation(){
           int summ = 0;
           double mean = average();
           double standev[] = new double[runs];
@@ -90,19 +93,19 @@ public class Statistics {
           }
           stdv = Math.sqrt(summ/runs);
           stdv = Math.round(stdv*100);
-          stdv = stdv*100;
+          stdv = stdv/100;
           return (stdv);
-	}
+     }
 
-	/** 
+     /** 
      *  @return Returns the complete statistics information:
      * current minimum, current maximim, current average and
      * current standard deviation. For the last two, only two 
      * digits decimals are shown
      */
-	public String toString(){
-          String stat = "Stat";
+     public String toString(){
+          String stat = "We have run " + runs + " experiments\nThe min was: " + min + "\nThe max was: " + max + "\nThe mean was: " + avg + "\nThe standard deviation was: " + stdv + "";
           return (stat);
-	}
+     }
 
 }

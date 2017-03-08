@@ -5,7 +5,10 @@
  * the experiments.
  *
  * @author gvj (gvj@eecs.uottawa.ca)
- *
+ *Authors for this iteration: Sam Worrod (8653389) and Jaimin Patel (8721083)
+ *Course: ITI 1121 A
+ *Assignment 2
+ *Question: 1
  */
 
 public class BirthdayParadox {
@@ -29,22 +32,14 @@ public class BirthdayParadox {
      */
  	public static Statistics runExperiments(int range, int numberOfRuns){
           Statistics stat = new Statistics(numberOfRuns);
-          boolean flag = false;
+          
+          int currentCount=0;
           for (int i=0; i<numberOfRuns; i++) {
-               int count = 0;
-               int n[] = new int[range];
-               for (int k=0; k<range; k++) {
-                    count++;
-                    n[k] = generator.nextInt((range)+1);
-                    for (int j=0; j<k; j++) {
-                         if (n[k] == n[j]) {
-                              stat.updateStatistics(count);
-                              break;
-                         }
-                    }
-                    break;
-               }
+               int count=oneRun(range);
+               
+          stat.updateStatistics(count);
           }
+          
           return (stat);
 	}
 
@@ -60,19 +55,20 @@ public class BirthdayParadox {
      */
 	
  	private static int oneRun(int range){
-          int exp[] = new int[range];
-          int count = 0;
-          boolean flag = false;
-          for (int i=0; i<range; i++) {
+          boolean flag=false;
+          int n[] = new int[range];
+          int count=0;
+          for (int k=0; k<range; k++) {
                count++;
-               exp[i] = generator.nextInt((range)+1);
-               for (int k=0; k<i; k++) {
-                    if (exp[i] == exp[k]) {
-                         break;
+               n[k] = generator.nextInt((range)+1);
+               for (int j=0; j<k; j++) {
+                    if (n[k] == n[j]) 
+                    {
+                         return(count);
                     }
                }
           }
-          return (count);   
+          return(count);
 	}
 	
 
@@ -87,6 +83,7 @@ public class BirthdayParadox {
      * the size of the set and the number of runs
      */
 	public static void main(String[] args) {
+          StudentInfo.display();
           int[] intargs = new int[args.length];
           for (int i = 0; i < args.length; i++) {
                intargs[i] = Integer.parseInt(args[i]);
@@ -101,7 +98,7 @@ public class BirthdayParadox {
                range = intargs[0];
                numberOfRuns = intargs[1];
           }
-          Statistics x = BirthdayParadox.runExperiments(range, numberOfRuns);
+          Statistics x = runExperiments(range, numberOfRuns);
           System.out.println(x);
 	}
 
