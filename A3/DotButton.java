@@ -79,22 +79,22 @@ public class DotButton extends JButton {
 
     public void setColor(int color) {
         if (iconSize == 0) {
-            if (color == 0 && iconSize == 0) {
+            if (color == 0) {
                 setIcon(new ImageIcon("data/M/ball-0.png"));
             }
-            else if (color == 1 && iconSize == 0) {
+            else if (color == 1) {
                 setIcon(new ImageIcon("data/M/ball-1.png"));
             }
-            else if (color == 2 && iconSize == 0) {
+            else if (color == 2) {
                 setIcon(new ImageIcon("data/M/ball-2.png"));
             }
-            else if (color == 3 && iconSize == 0) {
+            else if (color == 3) {
                 setIcon(new ImageIcon("data/M/ball-3.png"));
             }
-            else if (color == 4 && iconSize == 0) {
+            else if (color == 4) {
                 setIcon(new ImageIcon("data/M/ball-4.png"));
             }
-            else if (color == 5 && iconSize == 0) {
+            else if (color == 5) {
                 setIcon(new ImageIcon("data/M/ball-5.png"));
             }
         }
