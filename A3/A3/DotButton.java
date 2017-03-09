@@ -97,7 +97,7 @@ public class DotButton extends JButton {
      */
 
     public int getRow() {
-        reutrn(row);
+        return(row);
     }
 
     /**

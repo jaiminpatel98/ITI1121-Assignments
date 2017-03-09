@@ -30,8 +30,8 @@ public class GameModel {
     public static final int NUMBER_OF_COLORS  = 6;
     Random generator = new Random();
     private int color;
-    private int steps; //number of steps taken
-    private boolean status; //false for not captured and true for captured
+    private int steps = 0; //number of steps taken
+    private boolean status = false; //false for not captured and true for captured
     private int selcolor; //the selected color
     private int size=10; //size of the boardboard
 
@@ -42,7 +42,7 @@ public class GameModel {
      *            the size of the board
      */
     public GameModel(int size) {
-        this.size = size; //initializes size of  
+        this.size = size; //initializes size of board
     }
 
 
@@ -74,8 +74,8 @@ public class GameModel {
      * @return the status of the dot at location (i,j)
      */   
     public int getColor(int i, int j){
-
-        return(DotInfo(i,j).getColor());
+        return(board[i][j].getColor());
+        //return(DotInfo(i,j).getColor());
     }
 
     /**
@@ -88,7 +88,7 @@ public class GameModel {
      * @return the status of the dot at location (i,j)
      */   
     public boolean isCaptured(int i, int j){
-        return(DotInfo(i, j).isCaptured());
+        return(board[i][j].isCaptured());
     }
 
     /**
@@ -100,7 +100,7 @@ public class GameModel {
      *            the y coordinate of the dot
      */   
     public void capture(int i, int j){
-        DotInfo(i, j).setCaptured(true);
+        board[i][j].setCaptured(true);
    }
 
 

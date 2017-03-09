@@ -1,0 +1,11 @@
+public class ArrayStack<E> implements Stack<e> {
+  private E[] elems;
+  private int top;
+  
+  public ArrayStack (int capacity) {
+    elems =  (E[]) new Object[capaecity];
+    top = 0;
+  }
+  
+  pub
+}

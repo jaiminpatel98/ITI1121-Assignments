@@ -16,7 +16,7 @@ public interface Stack<E> {
      */
 
     public abstract boolean isEmpty();
-
+            
     /**
      * Returns a reference to the top element; does not change
      * the state of this Stack.

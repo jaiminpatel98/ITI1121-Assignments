@@ -11,7 +11,7 @@ public class DotInfo {
     private int x; //x-coord of dot
     private int y; //y-coord of dot
     private int color; //color of dot
-    private boolean captured = false; //T or F for if captured    
+    private boolean captured; //T or F for if captured    
 
     /**
      * Constructor 
@@ -27,6 +27,7 @@ public class DotInfo {
         this.x = x;
         this.y = y;
         this.color = color;
+        captured = false;
     }
 
     /**
@@ -54,7 +55,7 @@ public class DotInfo {
      *            the new value for captured
      */
     public void setCaptured(boolean captured) {
-        captured = captured;
+        this.captured = captured;
     }
 
     /**
@@ -75,4 +76,4 @@ public class DotInfo {
         return(color);
     }
 
- }
+ }  
