@@ -183,22 +183,22 @@ public class GameModel {
      * @return String representation of the model
      */
     public String toString(){
-        //return("Model(Size: " + size +", Steps: " + steps + ", Finished: " + isFinished() + ")");
-      String str = ""; 
+        return("Model(Size: " + size +", Steps: " + steps + ", Finished: " + isFinished() + ")");
+      // String str = ""; 
       
-      for(int i = 0; i < size; i++){ 
-        for(int j = 0; j < size; j++){  
-          if(board[i][j].isCaptured()){ 
-            str += selColor + " "; 
-          } 
-          else{ 
-            str += board[i][j].getColor() + " "; 
-          } 
-        } 
-        str += "\n"; 
-      } 
+      // for(int i = 0; i < size; i++){ 
+      //   for(int j = 0; j < size; j++){  
+      //     if(board[i][j].isCaptured()){ 
+      //       str += selColor + " "; 
+      //     } 
+      //     else{ 
+      //       str += board[i][j].getColor() + " "; 
+      //     } 
+      //   } 
+      //   str += "\n"; 
+      // } 
       
-      return str; 
+      // return str; 
     }
     
 }

@@ -1,8 +1,8 @@
+import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
-import java.io.File;
-import java.imageio.ImageIO;
-import java.awt.image.BufferedImage;
+import javax.swing.JButton;
+
 
 
 /**
@@ -14,33 +14,10 @@ import java.awt.image.BufferedImage;
  */
 
 public class GameView extends JFrame {
-	private GameModel model;
-	private GameController gameController;
-	private int size;
-
-	BufferedImage greyN   = ImageIO.read(new File("data/N/ball-0.png"));
-	BufferedImage orangeN = ImageIO.read(new File("data/N/ball-1.png"));
-	BufferedImage blueN   = ImageIO.read(new File("data/N/ball-2.png"));
-	BufferedImage greenN  = ImageIO.read(new File("data/N/ball-3.png"));
-	BufferedImage purpleN = ImageIO.read(new File("data/N/ball-4.png"));
-	BufferedImage redN    = ImageIO.read(new File("data/N/ball-5.png"));
-
-	JLabel greyNLabel = new JLabel(new ImageIcon(greyN));
-	JLabel orangeNLabel = new Jlabel
-
-	BufferedImage greyM   = ImageIO.read(new File("data/M/ball-0.png"));
-	BufferedImage orangeM = ImageIO.read(new File("data/M/ball-1.png"));
-	BufferedImage blueM   = ImageIO.read(new File("data/M/ball-2.png"));
-	BufferedImage greenM  = ImageIO.read(new File("data/M/ball-3.png"));
-	BufferedImage purpleM = ImageIO.read(new File("data/M/ball-4.png"));
-	BufferedImage redM    = ImageIO.read(new File("data/M/ball-5.png"));
-
-	BufferedImage greyS   = ImageIO.read(new File("data/S/ball-0.png"));
-	BufferedImage orangeS = ImageIO.read(new File("data/S/ball-1.png"));
-	BufferedImage blueS   = ImageIO.read(new File("data/S/ball-2.png"));
-	BufferedImage greenS  = ImageIO.read(new File("data/S/ball-3.png"));
-	BufferedImage purpleS = ImageIO.read(new File("data/S/ball-4.png"));
-	BufferedImage redS    = ImageIO.read(new File("data/S/ball-5.png"));
+    private DotButton[][] buttonBoard;
+    private GameModel model;
+    private GameController gameController;
+    private int size;
 
     /**
      * Constructor used for initializing the Frame
@@ -52,180 +29,71 @@ public class GameView extends JFrame {
      */
 
     public GameView(GameModel model, GameController gameController) {
-    	this.model = model;
-    	this.size = size;
-    	this.gameController = gameController;
-    	JLabel input = new JLabel(model.toString());
-		add(input);
-    	setBackground(Color.WHITE);
-    	setVisible(true);
-    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.model = model;
+        this.gameController = gameController;
+        size = model.getSize();
 
+        setTitle("Flood It");
+        setSize(300,700);
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    	JPanel gameBoard = new JPanel();
-    	add(gameBoard, BorderLayout.NORTH);
-    	gameBoard.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
-    	if (size>25) {
-    		gameBoard.setSize(size*11, size*11);
-    	}
-    	if (size<=25 && size>=10) {
-    		gameBoard.setSize(size*28, size*28);
-    	}
-    	if (size<10) {
-    		gameBoard.setSize(size*40, size*40);
-    	}
-    	gameBoard.setLayout(new GridLayout(size,size));
-    	//this nested for loop goes through the entire board,
-    	//and adds an icon to the space on the grid,
-    	//depending on their colour and size of the board.
-    	DotButton[][] boardDots = new DotButton[size][size]; // this array assigns every dot on the board to a unique DotButton class
-    	for (int i=0; i<size; i++) {
-    		for (int j=0; j<size; j++) {
-    			if (model.getColor(i, j) == 0) {
-    				if (size>=10 && size<=25) {
-    					boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 2);
-    					gameBoard.add(greyN);
-   					}
-   					if (size<10) {
-   						boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 3);
-   						gameBoard.add(greyM);
-   					}
-   					if (size>25) {
-   						boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 1);
-   						gameBoard.add(greyS);
-   					}
-    			}
-    			if (model.getColor(i, j) == 1) {
-    				if(size>=10 && size<=25) {
-    					boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 2);
-    					gameBoard.add(orangeN);
-    				}
-    				if (size<10) {
-    					boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 3);
-    					gameBoard.add(orangeM);
-    				}
-    				if (size>25) {
-    					DotButton[i][j] = new DotButton(i, j, model.getColor(i, j), 1);
-    					gameBoard.add(orangeS);
-    				}
-    			}
-    			if (model.getColor(i, j) == 2) {
-    				boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 2);
-    				if (size>=10 && size<=25) {
-    					gameBoard.add(blueN);
-    				}
-    				if (size<10) {
-    					boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 3);
-    					gameBoard.add(blueM);
-    				}
-    				if (size>25) {
-    					boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 1);
-    					gameBoard.add(blueS);
-    				}
-    			}
-    			if (model.getColor(i, j) == 3) {
-    				if (size>=10 && size<=25) {
-    					boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 2);
-    					gameBoard.add(greenN);
-    				}
-    				if (size<10) {
-    					boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 3);
-    					gameBoard.add(greenM);
-    				}
-    				if (size>25) {
-    					boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 3);
-    					gameBoard.add(greenS);
-    				}   			
-    			}
-    			if (model.getColor(i, j) == 4) {
-    				if (size>=10 && size<=25) {
-    					boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 2);
-    					gameBoard.add(purpleN);
-    				}
-    				if (size<10) {
-    					boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 3);
-    					gameBoard.add(purpleM);
-    				}
-    				if (size>25) {
-    					boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 1);
-    					gaemBoard.add(purpleS);
-    				}				
-    			}
-    			if (model.getColor(i, j) == 5) {
-    				if (size>=10 && size<=25) {
-    					boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 2);
-    					gameBoard.add(redN);
-    				}
-    				if (size<10) {
-    					boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 3);
-    					gameBoard.add(redM);
-    				}
-    				if (size>25) {
-    					boardDots[i][j] = new DotButton(i, j, model.getColor(i, j), 1);
-    					gameBoard.add(redS);
-    				}
-    			}
-    		}
-    	}
+        JPanel boardPanel = new JPanel();
+        boardPanel.setLayout(new GridLayout(size,size));
+        if (size>=10 && size<=25) {
+            boardPanel.setSize(28*size, 28*size);
+        }
+        else if (size>25) {
+            boardPanel.setSize(11*size, 11*size);
+        }
+        add(boardPanel, BorderLayout.NORTH);
 
-    	JPanel colorsel = new JPanel();
-    	add(colorsel, BorderLayout.CENTER);
-    	colorsel.setLayout(new GridLayout(6,1));
-    	colorsel.setSize(168, 28);
-    	//this adds the selecter color buttons
-    	for (int i=1; i<=6; i++) {
-    		if (i==1) {
-    			selButton = new JButton(greyN);
-    			selButton.setBorder(BorderFactory.createEmptyBorder());
-  				selButton.setContentAreaFilled(false);
-    			colorsel.add(selButton);
-    		}
-    		if (i==2) {
-    			selButton = new JButton(orangeN);
-    			selButton.setBorder(BorderFactory.createEmptyBorder());
-  				selButton.setContentAreaFilled(false);
-    			colorsel.add(selButton);
-    		}
-    		if (i==3) {
-    			selButton = new JButton(blueN);
-    			selButton.setBorder(BorderFactory.createEmptyBorder());
-  				selButton.setContentAreaFilled(false);
-    			colorsel.add(selButton);
-    		}
-    		if (i==4) {
-    			selButton = new JButton(greenN);
-    			selButton.setBorder(BorderFactory.createEmptyBorder());
-  				selButton.setContentAreaFilled(false);
-    			colorsel.add(selButton);
-    		}
-    		if (i==5) {
-    			selButton = new JButton(purpleN);
-    			selButton.setBorder(BorderFactory.createEmptyBorder());
-  				selButton.setContentAreaFilled(false);
-    			colorsel.add(selButton);
-    		}
-    		if (i==6) {
-    			selButton = new JButton(redN);
-    			selButton.setBorder(BorderFactory.createEmptyBorder());
-  				selButton.setContentAreaFilled(false);
-    			colorsel.add(selButton);
-    		}
-    	}
+        buttonBoard = new DotButton[size][size];
+        for (int i=0; i<size; i++) {
+            for (int j=0; j<size; j++) {
+                if (size>=10 && size<=25) {
+                    buttonBoard[i][j] = new DotButton(i, j, model.getColor(i,j), 0);
+                    buttonBoard[i][j].setColor(model.getColor(i,j));
+                    boardPanel.add(buttonBoard[i][j]);
+                }
+                if (size>25) {
+                    buttonBoard[i][j] = new DotButton(i, j, model.getColor(i,j), 1);
+                    buttonBoard[i][j].setColor(model.getColor(i,j));
+                    boardPanel.add(buttonBoard[i][j]);
+                }
+            }
+        } //gives each dot a button in an identical matrix to board, but instead of each element being DotInfo, they are DotButton
 
-    	JPanel control = new JPanel();
-    	control.setSize(size, 200);
-    	add(control, BorderLayout.SOUTH);
+        JPanel controlPanel = new JPanel();
+        controlPanel.setLayout(new GridLayout(1,6));
+        controlPanel.setSize(40*6, 40);
+        add(controlPanel, BorderLayout.CENTER);
+        DotButton grey = new DotButton(0,3);
+        controlPanel.add(grey);
+        DotButton orange = new DotButton(1,3);
+        controlPanel.add(orange);
+        DotButton blue = new DotButton(2,3);
+        controlPanel.add(blue);
+        DotButton green = new DotButton(3,3);
+        controlPanel.add(green);
+        DotButton purple = new DotButton(4,3);
+        controlPanel.add(purple);
+        DotButton red = new DotButton(5,3);
+        controlPanel.add(red);
 
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new GridLayout(1,3));
+        infoPanel.setSize(40*6, 40);
+        add(infoPanel, BorderLayout.SOUTH);
+        JLabel numOfSteps = new JLabel("Number of steps: " + model.getNumberOfSteps());
+        infoPanel.add(numOfSteps);
+        JButton reset = new JButton("Reset");
+        JButton quit = new JButton("Quit");
+        infoPanel.add(reset);
+        infoPanel.add(quit);
 
-    	JButton reset = new JButton("Reset");
-    	reset.setFocusPainted(false);
-    	control.add(reset, BorderLayout.CENTER);
+        setVisible(true);
 
-    	JButton quit = new JButton("Quit");
-    	quit.setFocusPainted(false);
-    	control.add(quit, BorderLayout.EAST);
-     	
-    	pack();
     }
 
     /**
@@ -233,6 +101,14 @@ public class GameView extends JFrame {
      */
 
     public void update(){
+        for (int i=0; i<size; i++) {
+            for (int j=0; j<size; j++) {
+                if (model.isCaptured(i,j)) {
+                    buttonBoard[i][j].setColor(model.getCurrentSelectedColor());
+                }
+
+            }
+        }
     }
 
 }

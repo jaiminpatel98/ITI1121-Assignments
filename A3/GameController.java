@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class GameController implements ActionListener {
   
     private GameModel model;
-    //private GameView view;
+    private GameView view;
 
     /**
      * Constructor used for initializing the controller. It creates the game's view 
@@ -25,17 +25,17 @@ public class GameController implements ActionListener {
      */
     public GameController(int size) {
         model = new GameModel(size);
-        //view = new GameView(model, this);
+        view = new GameView(model, this);
         flood(model.getCurrentSelectedColor());
         //test
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(model);
+        // Scanner scanner = new Scanner(System.in);
+        // System.out.println(model);
 
-        while (!model.isFinished()) {
-            System.out.println("Selected color: ");
-            selectColor(scanner.nextInt());
-            System.out.println(model);
-        }
+        // while (!model.isFinished()) {
+        //     System.out.println("Selected color: ");
+        //     selectColor(scanner.nextInt());
+        //     System.out.println(model);
+        // }
     }
 
     /**
@@ -53,12 +53,12 @@ public class GameController implements ActionListener {
      */
 
     public void actionPerformed(ActionEvent e) {
-        /*if (e.getActionCommand().equals("Reset")) {
+        if (e.getActionCommand().equals("Reset")) {
             model.reset();
         }
         if (e.getActionCommand().equals("Quit")) {
-            GameView.dispose();
-        }*/
+            
+        }
     }
     
 
