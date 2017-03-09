@@ -1,9 +1,10 @@
 //Code inspired by the ArrayStack implementation of Professor Guy Vincent Jordan of University of Ottawa
+
 public class ArrayStack<E> implements Stack<E> {
 
     private E[] elems;
     private int top;
-    
+    @SuppressWarnings("unchecked")
     public ArrayStack( int capacity ) {
         elems = (E[]) new Object[ capacity ];
         top = 0;
@@ -23,7 +24,7 @@ public class ArrayStack<E> implements Stack<E> {
         elems[ top ] = null; 
         return saved;
     }
-
+    @SuppressWarnings("unchecked")
     public void push( E element ) {
 
       if (top == elems.length) { 

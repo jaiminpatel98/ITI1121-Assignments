@@ -15,5 +15,6 @@ public class FloodIt {
      *            command line parameters
      */
     public static void main(String[] args) {
-
+        GameController controller = new GameController(12);
     }
+}

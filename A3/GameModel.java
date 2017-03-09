@@ -16,9 +16,7 @@ import java.util.Random;
  * @author Guy-Vincent Jourdan, University of Ottawa
  */
 public class GameModel {
-
-
-    /**
+/**
      * predefined values to capture the color of a DotInfo
      */
     public static final int COLOR_0           = 0;
@@ -29,11 +27,10 @@ public class GameModel {
     public static final int COLOR_5           = 5;
     public static final int NUMBER_OF_COLORS  = 6;
     Random generator = new Random();
-    private int color;
-    private int steps = 0; //number of steps taken
-    private boolean status = false; //false for not captured and true for captured
-    private int selcolor; //the selected color
-    private int size=10; //size of the boardboard
+    private int steps;
+    private int size; //size of the boardboard
+    private DotInfo[][] board;
+    private int selColor, dotsCaptured;
 
     /**
      * Constructor to initialize the model to a given size of board.
@@ -43,6 +40,8 @@ public class GameModel {
      */
     public GameModel(int size) {
         this.size = size; //initializes size of board
+        board = new DotInfo[size][size];
+        reset();
     }
 
 
@@ -51,7 +50,16 @@ public class GameModel {
      * is cleared up . 
      */
     public void reset(){ 
-        GameModel model = new GameModel(size); //restarts the GameModel
+        for (int i=0; i<size; i++) {
+            for (int j=0; j<size; j++) {
+                int color = generator.nextInt(6);
+                board[i][j]= new DotInfo(i, j, color);
+            }
+        }
+        steps = 0;
+        dotsCaptured = 1;
+        selColor = board[0][0].getColor();
+        board[0][0].setCaptured(true);
     }
 
 
@@ -100,6 +108,7 @@ public class GameModel {
      *            the y coordinate of the dot
      */   
     public void capture(int i, int j){
+    	dotsCaptured++;
         board[i][j].setCaptured(true);
    }
 
@@ -120,7 +129,7 @@ public class GameModel {
      *            the new value for currentSelectedColor
     */   
     public void setCurrentSelectedColor(int val) {
-        selcolor = val;
+        selColor = val;
     }
 
     /**
@@ -129,7 +138,7 @@ public class GameModel {
      * @return currentSelectedColor
      */   
     public int getCurrentSelectedColor() {
-        return(selcolor);
+        return(selColor);
     }
 
 
@@ -145,7 +154,7 @@ public class GameModel {
      * @return model[i][j]
      */   
     public DotInfo get(int i, int j) {
-        return(DotInfo(i, j).toString());
+        return(board[i][j]);
     }
 
 
@@ -164,18 +173,7 @@ public class GameModel {
      * @return true if the game is finished, false otherwise
      */
     public boolean isFinished(){
-        boolean fin = false;
-        int i = 0;
-        int j = 0;
-        while(!fin) {
-            if (i==(size-1)) {
-                j++;
-            }
-            fin = isCaptured(i, j);
-            i++;
-        } /*while loop continues if it keeps finding captured dots,
-        but if it comes across not captured dot the loop stops and returns false.*/
-        return (fin);
+        return dotsCaptured == size*size;
     }
 
 
@@ -185,17 +183,22 @@ public class GameModel {
      * @return String representation of the model
      */
     public String toString(){
-        return("Model(Size: " + size +", Steps: " + steps + ", Finished: " + isFinished() + ")");
+        //return("Model(Size: " + size +", Steps: " + steps + ", Finished: " + isFinished() + ")");
+      String str = ""; 
+      
+      for(int i = 0; i < size; i++){ 
+        for(int j = 0; j < size; j++){  
+          if(board[i][j].isCaptured()){ 
+            str += selColor + " "; 
+          } 
+          else{ 
+            str += board[i][j].getColor() + " "; 
+          } 
+        } 
+        str += "\n"; 
+      } 
+      
+      return str; 
     }
-    public static void main(String[] args) {
-        DotInfo[][] board = new DotInfo[size][size];
-        for (int i=0; i<size; i++) {
-            for (int j=0; j<size; j++) {
-                color= generator.nextInt(6);
-                board[i][j]= new DotInfo(i,j,color);
-            }
-        }
-
-
-    }
+    
 }
