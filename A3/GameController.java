@@ -70,12 +70,12 @@ public class GameController extends JFrame implements ActionListener {
         //test
         // Scanner scanner = new Scanner(System.in);
         // System.out.println(model);
-
-        // while (!model.isFinished()) {
-        //     System.out.println("Selected color: ");
-        //     selectColor(scanner.nextInt());
-        //     System.out.println(model);
-        // }
+        view.update();
+        while (!model.isFinished()) {
+             //System.out.println("Selected color: ");
+             selectColor(model.getCurrentSelectedColor());
+             view.update();
+         }
     }
 
     /**

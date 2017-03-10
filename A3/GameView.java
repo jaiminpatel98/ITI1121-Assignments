@@ -122,10 +122,10 @@ public class GameView extends JFrame{
             for (int j=0; j<size; j++) {
                 if (model.isCaptured(i,j)) {
                     buttonBoard[i][j].setColor(model.getCurrentSelectedColor());
-                    buttonBoard[i][j].add(getCurrentLabel());
-                    buttonBoard[i][j].setVisible(true);
-                    boardPanel.add(buttonBoard[i][j]);
-                    boardPanel.setVisible(true);                
+                    //buttonBoard[i][j].add(getCurrentLabel());
+                    //buttonBoard[i][j].setVisible(true);
+                    //boardPanel.add(buttonBoard[i][j]);
+                    //boardPanel.setVisible(true);                
                 }
             }
         }
