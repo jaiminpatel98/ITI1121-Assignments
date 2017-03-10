@@ -1,6 +1,7 @@
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.*;
 /**
  * In the application <b>FloodIt</b>, a <b>DotButton</b> is a specialized color of
  * <b>JButton</b> that represents a dot in the game. It can have one of six colors
@@ -27,6 +28,7 @@ public class DotButton extends JButton {
     private int column;
     private int iconSize;
     private int color;
+    private JLabel currentLabel=new JLabel();
     /**
      * Constructor used for initializing a cell of a specified color.
      * 
@@ -47,7 +49,9 @@ public class DotButton extends JButton {
         this.color = color;
         setColor(color);
         setEnabled(false);
+        setBorder(BorderFactory.createEmptyBorder());
         setDisabledIcon(this.getIcon());
+        this.setVisible(true);
    }
 
  /**
@@ -65,7 +69,7 @@ public class DotButton extends JButton {
         this.color = color;
         setColor(color);
         this.iconSize = iconSize;
-        
+        this.setVisible(true);
     }
  
 
@@ -80,64 +84,65 @@ public class DotButton extends JButton {
     public void setColor(int color) {
         if (iconSize == 0) {
             if (color == 0) {
-                setIcon(new ImageIcon("data/M/ball-0.png"));
+                currentLabel.setIcon(new ImageIcon("data/M/ball-0.png"));
             }
             else if (color == 1) {
-                setIcon(new ImageIcon("data/M/ball-1.png"));
+                currentLabel.setIcon(new ImageIcon("data/M/ball-1.png"));
             }
             else if (color == 2) {
-                setIcon(new ImageIcon("data/M/ball-2.png"));
+                currentLabel.setIcon(new ImageIcon("data/M/ball-2.png"));
             }
             else if (color == 3) {
-                setIcon(new ImageIcon("data/M/ball-3.png"));
+                currentLabel.setIcon(new ImageIcon("data/M/ball-3.png"));
             }
             else if (color == 4) {
-                setIcon(new ImageIcon("data/M/ball-4.png"));
+                currentLabel.setIcon(new ImageIcon("data/M/ball-4.png"));
             }
             else if (color == 5) {
-                setIcon(new ImageIcon("data/M/ball-5.png"));
+                currentLabel.setIcon(new ImageIcon("data/M/ball-5.png"));
             }
         }
         else if (iconSize == 1) {
             if (color == 0) {
-                setIcon(new ImageIcon("data/S/ball-0.png"));
+                currentLabel.setIcon(new ImageIcon("data/S/ball-0.png"));
             }
             else if (color == 1) {
-                setIcon(new ImageIcon("data/S/ball-1.png"));
+                currentLabel.setIcon(new ImageIcon("data/S/ball-1.png"));
             }
             else if (color == 2) {
-                setIcon(new ImageIcon("data/S/ball-2.png"));
+                currentLabel.setIcon(new ImageIcon("data/S/ball-2.png"));
             }
             else if (color == 3) {
-                setIcon(new ImageIcon("data/S/ball-3.png"));
+                currentLabel.setIcon(new ImageIcon("data/S/ball-3.png"));
             }
             else if (color == 4) {
-                setIcon(new ImageIcon("data/S/ball-4.png"));
+                currentLabel.setIcon(new ImageIcon("data/S/ball-4.png"));
             }
             else if (color == 5) {
-                setIcon(new ImageIcon("data/S/ball-5.png"));
+                currentLabel.setIcon(new ImageIcon("data/S/ball-5.png"));
             }
         }
         else if (iconSize==3) {
             if (color == 0) {
-                setIcon(new ImageIcon("data/N/ball-0.png"));
+                currentLabel.setIcon(new ImageIcon("data/N/ball-0.png"));
             }
             else if (color == 1) {
-                setIcon(new ImageIcon("data/N/ball-1.png"));
+                currentLabel.setIcon(new ImageIcon("data/N/ball-1.png"));
             }
             else if (color == 2) {
-                setIcon(new ImageIcon("data/N/ball-2.png"));
+                currentLabel.setIcon(new ImageIcon("data/N/ball-2.png"));
             }
             else if (color == 3) {
-                setIcon(new ImageIcon("data/N/ball-3.png"));
+                currentLabel.setIcon(new ImageIcon("data/N/ball-3.png"));
             }
             else if (color == 4) {
-                setIcon(new ImageIcon("data/N/ball-4.png"));
+                currentLabel.setIcon(new ImageIcon("data/N/ball-4.png"));
             }
             else if (color == 5) {
-                setIcon(new ImageIcon("data/N/ball-5.png"));
+                currentLabel.setIcon(new ImageIcon("data/N/ball-5.png"));
             }
         }
+        this.add(currentLabel);
    }
 
     /**
@@ -168,8 +173,33 @@ public class DotButton extends JButton {
     public int getColumn() {
         return (column);
     }
+    public int getIconSize(){
+        return (iconSize);
+    }
 
-
+    public String getColorString(int color) {
+        if (color == 0) {
+            return ("grey");
+        }
+        else if (color == 1) {
+            return ("orange");
+        }
+        else if (color == 2) {
+            return ("blue");
+        }
+        else if (color == 3) {
+            return ("green");
+        }
+        else if (color == 4) {
+            return ("purple");
+        }
+        else {
+            return("red");
+        }
+    }
+    public JLabel getCurrentLabel(){
+        return currentLabel;
+    }
 // ADD YOUR PRIVATE METHODS HERE (IF USING ANY)
 
 
