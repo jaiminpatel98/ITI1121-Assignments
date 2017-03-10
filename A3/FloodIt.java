@@ -3,6 +3,10 @@
  *
  * @author Guy-Vincent Jourdan, University of Ottawa
  */
+/*Authors for this iteration: Sam Worrod (8653389) and Jaimin Patel (8721083)
+ *Course: ITI 1121 A
+ *Assignment 3
+ */
 public class FloodIt {
 
 
@@ -15,6 +19,21 @@ public class FloodIt {
      *            command line parameters
      */
     public static void main(String[] args) {
-        GameController controller = new GameController(12);
+        StudentInfo.display();
+        if(args.length==0)
+        {
+            GameController controller = new GameController(12);
+        }
+        else{
+            int intargs = Integer.parseInt(args[0]);
+            if(intargs<12){
+             GameController controller = new GameController(12);
+            }
+            else
+            {
+                GameController controller = new GameController(intargs);
+            }
+        }
+       
     }
 }

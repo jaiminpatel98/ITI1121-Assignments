@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.util.Scanner;
 import javax.swing.*;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  * The class <b>GameController</b> is the controller of the game. It has a method
@@ -11,6 +12,10 @@ import javax.swing.JButton;
  * color. It then computesthe next step of the game, and  updates model and view.
  *
  * @author Guy-Vincent Jourdan, University of Ottawa
+ */
+/*Authors for this iteration: Sam Worrod (8653389) and Jaimin Patel (8721083)
+ *Course: ITI 1121 A
+ *Assignment 3
  */
 
 
@@ -83,6 +88,8 @@ public class GameController extends JFrame implements ActionListener {
      */
     public void reset(){
         model.reset();
+        flood(model.getCurrentSelectedColor());
+        view.update();
     }
 
     /**
@@ -140,7 +147,14 @@ public class GameController extends JFrame implements ActionListener {
             model.step();
             flood(color);
             if (model.isFinished()) {
-                System.out.println("You finished");
+                int choice=JOptionPane.showConfirmDialog(null, "You won in " + model.getNumberOfSteps() + " moves\nDo you want to play again?", "Game Finished", JOptionPane.YES_NO_OPTION);
+                if(choice == JOptionPane.YES_OPTION) {
+                    reset();
+                }
+                else
+                {
+                    System.exit(0);
+                }
             }
         }
     }

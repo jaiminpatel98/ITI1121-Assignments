@@ -21,7 +21,11 @@ import javax.swing.*;
  * "http://developer.apple.com/library/safari/#samplecode/Puzzler/Introduction/Intro.html%23//apple_ref/doc/uid/DTS10004409"
  * >Based on Puzzler by Apple</a>.
  * @author Guy-Vincent Jourdan, University of Ottawa
+ *Authors for this iteration: Sam Worrod (8653389) and Jaimin Patel (8721083)
+ *Course: ITI 1121 A
+ *Assignment 3
  */
+
 
 public class DotButton extends JButton {
     private int row;

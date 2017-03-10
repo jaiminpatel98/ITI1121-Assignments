@@ -15,6 +15,10 @@ import java.util.Random;
  *
  * @author Guy-Vincent Jourdan, University of Ottawa
  */
+/*Authors for this iteration: Sam Worrod (8653389) and Jaimin Patel (8721083)
+ *Course: ITI 1121 A
+ *Assignment 3
+ */
 public class GameModel {
 /**
      * predefined values to capture the color of a DotInfo
@@ -61,7 +65,6 @@ public class GameModel {
         selColor = board[0][0].getColor();
         board[0][0].setCaptured(true);
     }
-
 
     /**
      * Getter method for the size of the game

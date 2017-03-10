@@ -1,5 +1,8 @@
 //Code inspired by the ArrayStack implementation of Professor Guy Vincent Jordan of University of Ottawa
-
+ /*Authors for this iteration: Sam Worrod (8653389) and Jaimin Patel (8721083)
+ *Course: ITI 1121 A
+ *Assignment 3
+ */
 public class ArrayStack<E> implements Stack<E> {
 
     private E[] elems;

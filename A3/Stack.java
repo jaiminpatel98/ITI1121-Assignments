@@ -6,6 +6,10 @@
  *
  * @author Marcel Turcotte
  */
+/*Authors for this iteration: Sam Worrod (8653389) and Jaimin Patel (8721083)
+ *Course: ITI 1121 A
+ *Assignment 3
+ */
 
 public interface Stack<E> {
 

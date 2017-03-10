@@ -24,6 +24,8 @@ public class GameView extends JFrame{
     private DotButton green;
     private DotButton purple;
     private DotButton red;
+    private JLabel numOfSteps; 
+    private JPanel infoPanel = new JPanel();
 
     /**
      * Constructor used for initializing the Frame
@@ -40,7 +42,13 @@ public class GameView extends JFrame{
         size = model.getSize();
 
         setTitle("Flood It");
-        setSize(40*size,(40*size+100));
+        if(size>25){
+            setSize(20*size,(20*size+50));
+        }
+        else{
+            setSize(40*size,(40*size+50));
+        }
+        
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -96,11 +104,10 @@ public class GameView extends JFrame{
         controlPanel.add(red);
         red.setVisible(true);
 
-        JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new GridLayout(1,3));
         infoPanel.setSize(40*6, 40);
         add(infoPanel, BorderLayout.SOUTH);
-        JLabel numOfSteps = new JLabel("Number of steps: " + model.getNumberOfSteps());
+        numOfSteps = new JLabel("    Number of steps: " + model.getNumberOfSteps());
         infoPanel.add(numOfSteps);
         JButton reset = gameController.getResetButton();        
         JButton quit = gameController.getQuitButton();
@@ -127,8 +134,15 @@ public class GameView extends JFrame{
                     //boardPanel.add(buttonBoard[i][j]);
                     //boardPanel.setVisible(true);                
                 }
+                else
+                {
+                    buttonBoard[i][j].setColor(buttonBoard[i][j].getColor());
+                }
             }
         }
+        numOfSteps.setText("    Number of steps: " + model.getNumberOfSteps());
+        infoPanel.remove(numOfSteps);
+        infoPanel.add(numOfSteps);
     }
     public DotButton getButton(int color) {
         if (color == 0) {
