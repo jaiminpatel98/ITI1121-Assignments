@@ -64,7 +64,7 @@ public class GameModel implements java.lang.Cloneable, Serializable{
    /**
      * Random generator
      */
-   private int[] settings;
+   private int[] settings = new int[2];
    /**
      * Random generator
      */

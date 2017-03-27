@@ -25,6 +25,9 @@ public class GameController implements ActionListener {
      */
     private GameModel gameModel;
  
+
+    private Stack<GameModel> gameStackUndo = new GenericLinkedStack<GameModel>();
+    private Stack<GameModel> gameStackRedo = new GenericLinkedStack<GameModel>();
     /**
      * Constructor used for initializing the controller. It creates the game's view 
      * and the game's model instances
@@ -32,6 +35,7 @@ public class GameController implements ActionListener {
      * @param size
      *            the size of the board on which the game will be played
      */
+
     public GameController(int size) {
         gameModel = new GameModel(size);
         gameModel = gameModel.restart();
@@ -80,8 +84,33 @@ public class GameController implements ActionListener {
                 {
                     System.out.println("Redo");
                 }
+                else if(clicked.getText().equals("Settings"))
+                {
+                    gameView.settingsMenu();
+                }
             
-        }
+            }
+            else if(e.getSource() instanceof JRadioButton)
+            {
+                JRadioButton clicked = (JRadioButton)(e.getSource());
+                if(clicked.getText().equals("Plane"))
+                {
+                    gameModel.setSettings(0, gameModel.getSettings()[1]);
+                }
+                else if(clicked.getText().equals("Torus"))
+                {
+                    gameModel.setSettings(1, gameModel.getSettings()[1]);
+                }
+                else if(clicked.getText().equals("Orthagonal"))
+                {
+                    gameModel.setSettings(gameModel.getSettings()[0],0);
+                }
+                else if(clicked.getText().equals("Diagonal"))
+                {
+                    gameModel.setSettings(gameModel.getSettings()[0],1);
+                }
+            }
+        }       
         else
         {
             if (e.getSource() instanceof DotButton) 
@@ -112,9 +141,30 @@ public class GameController implements ActionListener {
                     gameView.settingsMenu();
                 }
             }
+            else if(e.getSource() instanceof JRadioButton)
+            {
+                JRadioButton clicked = (JRadioButton)(e.getSource());
+                if(clicked.getText().equals("Plane"))
+                {
+                    gameModel.setSettings(0, gameModel.getSettings()[1]);
+                }
+                else if(clicked.getText().equals("Torus"))
+                {
+                    gameModel.setSettings(1, gameModel.getSettings()[1]);
+                }
+                else if(clicked.getText().equals("Orthagonal"))
+                {
+                    gameModel.setSettings(gameModel.getSettings()[0],0);
+                }
+                else if(clicked.getText().equals("Diagonal"))
+                {
+                    gameModel.setSettings(gameModel.getSettings()[0],1);
+                }
+            }
 
         }
     }
+
 
     /**
      * <b>selectColor</b> is the method called when the user selects a new color.
@@ -159,7 +209,7 @@ public class GameController implements ActionListener {
      */
      private void flood() {
 
-        Stack<DotInfo> stack = new GenericArrayStack<DotInfo>(gameModel.getSize()*gameModel.getSize());
+        Stack<DotInfo> stack = new GenericLinkedStack<DotInfo>();
         for(int i =0; i < gameModel.getSize(); i++) {
            for(int j =0; j < gameModel.getSize(); j++) {
                 if(gameModel.isCaptured(i,j)) {
@@ -169,25 +219,42 @@ public class GameController implements ActionListener {
         }
 
         DotInfo dotInfo;
-        while(!stack.isEmpty()){
-            dotInfo = stack.pop();
-            if((dotInfo.getX() > 0) && shouldBeCaptured (dotInfo.getX()-1, dotInfo.getY())) {
-                gameModel.capture(dotInfo.getX()-1, dotInfo.getY());
-                stack.push(gameModel.get(dotInfo.getX()-1, dotInfo.getY()));
-            }  
-            if((dotInfo.getX() < gameModel.getSize()-1) && shouldBeCaptured (dotInfo.getX()+1, dotInfo.getY())) {
-                gameModel.capture(dotInfo.getX()+1, dotInfo.getY());
-                stack.push(gameModel.get(dotInfo.getX()+1, dotInfo.getY()));
+        if(!stack.isEmpty)
+        {
+            while(!stack.isEmpty())
+            {
+                dotInfo = stack.pop();
+                //REGULAR GAME
+                if((dotInfo.getX() > 0) && shouldBeCaptured (dotInfo.getX()-1, dotInfo.getY())) 
+                {
+                    gameModel.capture(dotInfo.getX()-1, dotInfo.getY());
+                    stack.push(gameModel.get(dotInfo.getX()-1, dotInfo.getY()));
+                }  
+                if((dotInfo.getX() < gameModel.getSize()-1) && shouldBeCaptured (dotInfo.getX()+1, dotInfo.getY())) 
+                {
+                    gameModel.capture(dotInfo.getX()+1, dotInfo.getY());
+                    stack.push(gameModel.get(dotInfo.getX()+1, dotInfo.getY()));
+                }
+                if((dotInfo.getY() > 0) && shouldBeCaptured (dotInfo.getX(), dotInfo.getY()-1)) 
+                {
+                    gameModel.capture(dotInfo.getX(), dotInfo.getY()-1);
+                    stack.push(gameModel.get(dotInfo.getX(), dotInfo.getY()-1));
+                }  
+                if((dotInfo.getY() < gameModel.getSize()-1) && shouldBeCaptured (dotInfo.getX(), dotInfo.getY()+1)) 
+                {
+                    gameModel.capture(dotInfo.getX(), dotInfo.getY()+1);
+                    stack.push(gameModel.get(dotInfo.getX(), dotInfo.getY()+1));
+                }
+
+                //PLAYING IN TORUS FORMAT (ABLE TO WRAP AROUND THE BOARD)
+                if(gameModel.getSettings()[0]==1)
+                {
+                
+                }
             }
-            if((dotInfo.getY() > 0) && shouldBeCaptured (dotInfo.getX(), dotInfo.getY()-1)) {
-                gameModel.capture(dotInfo.getX(), dotInfo.getY()-1);
-                stack.push(gameModel.get(dotInfo.getX(), dotInfo.getY()-1));
-            }  
-            if((dotInfo.getY() < gameModel.getSize()-1) && shouldBeCaptured (dotInfo.getX(), dotInfo.getY()+1)) {
-                gameModel.capture(dotInfo.getX(), dotInfo.getY()+1);
-                stack.push(gameModel.get(dotInfo.getX(), dotInfo.getY()+1));
-            }
+
         }
+        
     }
 
 

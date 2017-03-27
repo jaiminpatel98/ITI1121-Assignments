@@ -70,6 +70,18 @@ public class GameView extends JFrame {
         buttonExit.setFocusPainted(false);
         buttonExit.addActionListener(gameController);
 
+        JButton buttonUndo = new JButton("Undo");
+        buttonUndo.setFocusPainted(false);
+        buttonUndo.addActionListener(gameController);
+
+        JButton buttonRedo = new JButton("Redo");
+        buttonRedo.setFocusPainted(false);
+        buttonRedo.addActionListener(gameController);
+
+        JButton buttonSettings = new JButton("Settings");
+        buttonSettings.setFocusPainted(false);
+        buttonSettings.addActionListener(gameController);
+
         JPanel control = new JPanel();
         control.setBackground(Color.WHITE);
         scoreLabel = new JLabel();
@@ -77,8 +89,21 @@ public class GameView extends JFrame {
         control.add(buttonReset);
         control.add(buttonExit);
 
+        JPanel topMenu = new JPanel();
+        topMenu.setBackground(Color.WHITE);
+        topMenu.add(buttonUndo);
+        topMenu.add(buttonRedo);
+        topMenu.add(buttonSettings);
+
+        JPanel northPanel = new JPanel();
+        northPanel.setLayout(new GridLayout(1,0));
+        northPanel.add(topMenu);
+        northPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 10));
+        northPanel.setBackground(Color.WHITE);
+        add(northPanel, BorderLayout.NORTH);
+
         JPanel southPanel = new JPanel();
-        southPanel.setLayout(new GridLayout(2,1));
+        southPanel.setLayout(new GridLayout(2,0));
         southPanel.add(control);
         southPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 10));
         southPanel.setBackground(Color.WHITE);
@@ -122,31 +147,27 @@ public class GameView extends JFrame {
         torusOption.addActionListener(gameController);
         orthagonalOption.addActionListener(gameController);
         diagonalOption.addActionListener(gameController);
-        if(gameModel.getSettings()==([0,0]))
+        if(gameModel.getSettings()[0]==0)
         {
             planeOption.setSelected(true);
             torusOption.setSelected(false);
-            orthagonalOption.setSelected(true);
-            diagonalOption.setSelected(false);
+            
         }
-        else if(gameModel.getSettings()==([0,1]))
+        else
         {
             planeOption.setSelected(true);
             torusOption.setSelected(false);
-            orthagonalOption.setSelected(false);
-            diagonalOption.setSelected(true);
+            
         }
-        else if(gameModel.getSettings()==([1,0]))
+        if(gameModel.getSettings()[0]==0)
         {
-            planeOption.setSelected(false);
-            torusOption.setSelected(true);
+            
             orthagonalOption.setSelected(true);
             diagonalOption.setSelected(false);
         }
         else
         {
-            planeOption.setSelected(false);
-            torusOption.setSelected(true);
+           
             orthagonalOption.setSelected(false);
             diagonalOption.setSelected(true);
         }
