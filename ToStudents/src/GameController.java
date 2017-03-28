@@ -26,8 +26,8 @@ public class GameController implements ActionListener {
     private GameModel gameModel;
  
 
-    private Stack<GameModel> gameStackUndo = new GenericLinkedStack<GameModel>();
-    private Stack<GameModel> gameStackRedo = new GenericLinkedStack<GameModel>();
+    private Stack<GameModel> undoStack = new GenericLinkedStack<GameModel>();
+    private Stack<GameModel> redoStack = new GenericLinkedStack<GameModel>();
     /**
      * Constructor used for initializing the controller. It creates the game's view 
      * and the game's model instances
@@ -87,6 +87,32 @@ public class GameController implements ActionListener {
                 else if(clicked.getText().equals("Settings"))
                 {
                     gameView.settingsMenu();
+                }
+                else if(clicked.getText().equals("Undo") && !undoStack.isEmpty())
+                {
+                    redoStack.push(gameModel); 
+                    gameModel = undoStack.pop();
+                    gameView.setModel(gameModel);
+                    gameView.update();
+                    redoStack.push(gameModel);
+                    GameModel temp = gameModel;
+                    gameModel = undoStack.pop();
+                    gameModel.updateDotArray(gameModel.getGameModel());
+                    gameView.setModel(gameModel);
+                    gameView.update();
+                }
+                else if(clicked.getText().equals("Redo") && !redoStack.isEmpty())
+                {
+                    undoStack.push(gameModel); 
+                    gameModel = redoStack.pop();
+                    gameView.setModel(gameModel);
+                    gameView.update();
+                    undoStack.push(gameModel);
+                    GameModel temp = gameModel;
+                    gameModel = redoStack.pop();
+                    gameModel.updateDotArray(gameModel.getGameModel());
+                    gameView.setModel(gameModel);
+                    gameView.update();
                 }
             
             }
@@ -219,7 +245,7 @@ public class GameController implements ActionListener {
         }
 
         DotInfo dotInfo;
-        if(!stack.isEmpty)
+        if(!stack.isEmpty())
         {
             while(!stack.isEmpty())
             {

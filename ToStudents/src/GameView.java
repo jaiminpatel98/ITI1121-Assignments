@@ -181,5 +181,11 @@ public class GameView extends JFrame {
         new JLabel("Orthagonal or Diagonal"), orthagonalOption, diagonalOption};
         int choices = JOptionPane.showConfirmDialog(null, settingChoices, "Settings Menu", JOptionPane.PLAIN_MESSAGE);
     }
+    public void setModel(GameModel m) {
+        this.gameModel = m;
+    }
+    public GameModel getModel() {
+        return (this.gameModel);
+    }
 
 }

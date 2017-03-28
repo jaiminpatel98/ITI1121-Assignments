@@ -70,6 +70,9 @@ public class GameModel implements java.lang.Cloneable, Serializable{
      */
 	private Random generator;
 
+    private GenericLinkedStack undoStack;
+    private GenericLinkedStack redoStack;
+
     /**
      * Constructor to initialize the model to a given size of board.
      * 
@@ -80,6 +83,7 @@ public class GameModel implements java.lang.Cloneable, Serializable{
         generator = new Random();
         sizeOfGame = size;
         reset();
+
     }
 
 
@@ -209,6 +213,7 @@ public class GameModel implements java.lang.Cloneable, Serializable{
      */
      public void step(){
         numberOfSteps++;
+        undoStack.push(this.clone());
     }
  
    /**
@@ -289,5 +294,25 @@ public class GameModel implements java.lang.Cloneable, Serializable{
         }
         return(this);
     }
-
+    public GameModel clone() {
+        GameModel model;
+        try {
+            model = (GameModel) super.clone();
+        }
+        catch (Exception e) {
+            throw new AssertionError();
+        }
+        return model;
+    }
+    public void updateDotArray (DotInfo[][] array) {
+        this.model = new DotInfo[sizeOfGame][sizeOfGame];
+        for (int i=0; i<sizeOfGame; i++) {
+            if(this.model[i] != array[i].clone()) {
+                this.model[i] = array[i].clone();
+            }
+        }
+    }
+    public DotInfo[][] getGameModel() {
+        return this.model;
+    }
 }

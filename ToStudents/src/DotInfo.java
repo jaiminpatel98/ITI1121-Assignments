@@ -6,7 +6,7 @@
  * @author Guy-Vincent Jourdan, University of Ottawa
  */
 
-public class DotInfo {
+public class DotInfo implements Cloneable {
 
     /**
      * The coordinate of this DotInfo.
