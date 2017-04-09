@@ -10,11 +10,11 @@ public class LinkedStack<E> implements Stack<E> {
     // Objects of the class Elem are used to store the elements of the
     // stack.
     
-    private static class Elem<T> {
-        private T value;
-        private Elem<T> next;
+    private static class Elem<E> {
+        private E value;
+        private Elem<E> next;
 
-        private Elem(T value, Elem<T> next) {
+        private Elem(E value, Elem<E> next) {
             this.value = value;
             this.next = next;
         }
@@ -82,15 +82,15 @@ public class LinkedStack<E> implements Stack<E> {
 
     public void roll() {
 
-        E pop = pop();
-        roll(top, top.next, pop);
+        Elem<E> pop = (Elem<E>) pop();
+        roll(top.value, top.next, pop);
 
 
     }
 
-    private void roll(T value, Elem<T> next, Elem<T> pop) {
+    private void roll(E value, Elem<E> next, Elem<E> pop) {
 
-        E first = new Elem<T>(value, next);
+        Elem<E> first = new Elem<E>(value, next);
         if (first.next == null) {
             next = pop;
             pop.next = null;
@@ -98,22 +98,20 @@ public class LinkedStack<E> implements Stack<E> {
             roll(next.value, next.next, pop);
         }
         
-
-
     }
 
     /** Removes the botttom element. The element is inserted on the
-     * top of the stack.
+     * top of the stack.    
      */
 
     public void unroll() {
 
-	   unroll(top, top.next);
+	   unroll(top.value, top.next);
 	
     }
 
-    private void unroll(T value, Elem<T> next) {
-        E first = new Elem<T>(value, next);
+    private void unroll(E value, Elem<E> next) {
+        Elem<E> first = new Elem<E>(value, next);
         if (next == null) {
             push(value);
             value = null;
