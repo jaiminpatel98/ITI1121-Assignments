@@ -1,3 +1,4 @@
+import java.util.EmptyStackException;
 /** Implements the interface <code>Stack</code> using linked elements.
  *
  *
@@ -81,7 +82,23 @@ public class LinkedStack<E> implements Stack<E> {
 
     public void roll() {
 
-	throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
+        E pop = pop();
+        roll(top, top.next, pop);
+
+
+    }
+
+    private void roll(T value, Elem<T> next, Elem<T> pop) {
+
+        E first = new Elem<T>(value, next);
+        if (first.next == null) {
+            next = pop;
+            pop.next = null;
+        } else {
+            roll(next.value, next.next, pop);
+        }
+        
+
 
     }
 
@@ -91,8 +108,18 @@ public class LinkedStack<E> implements Stack<E> {
 
     public void unroll() {
 
-	throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
+	   unroll(top, top.next);
 	
+    }
+
+    private void unroll(T value, Elem<T> next) {
+        E first = new Elem<T>(value, next);
+        if (next == null) {
+            push(value);
+            value = null;
+        } else {
+            unroll(next.value, next.next);
+        }
     }
 
     /** Returns a string representation of the stack.

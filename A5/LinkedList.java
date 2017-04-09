@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
  * @author  Marcel Turcotte (turcotte@eecs.uottawa.ca)
  */
 
-public class LinkedList<E> {
+public class LinkedList<E> {    
 
     // Objects of the class Elem are used to store the elements of the
     // list.
