@@ -88,18 +88,19 @@ public class LinkedStack<E> implements Stack<E> {
       
     }
 
-    private void roll(E value, LinkedStack stack) {
-      E p;
-      E q;
-      while (!isEmpty()) {
+    private void roll(E value, LinkedStack stack) 
+    {
+        E p;
+        E q;
         p = pop();
         stack.push(p);
+        if (isEmpty()) 
+        {
+            push(value);
+        }
         roll(p, stack);
-        
-      }
-      if (isEmpty()) {
-        push(value);
-      }
+    }
+      
       
 //      LinkedStack temp = new LinkedStack<E>();
 //      E p;

@@ -31,11 +31,11 @@ public class LinkedList<E> {
     private class LinkedListIterator implements Iterator<E> {
     
         private Elem<E> current;
-    
+
         private LinkedListIterator() {
             current = head;
         }
-    
+        @Override
         public E next() {
       
             if (current.next == head) {
@@ -43,11 +43,12 @@ public class LinkedList<E> {
             }
       
             current = current.next ; // move the cursor forward
-      
+            
             return current.value ;
         }
-    
-        public boolean hasNext() {
+        @Override
+        public boolean hasNext() 
+        {
             return current.next != head;
         }
     
@@ -80,9 +81,32 @@ public class LinkedList<E> {
      * @return an iterator for this list
      */
 
-    public Iterator<E> iterator(int stop) {
-
-	throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
+    
+    public Iterator<E> iterator(int stop) 
+    {
+        LinkedListIterator itr = new LinkedListIterator(){
+            private int steps=0;
+            @Override
+            public E next()
+            {
+                if(steps>stop)
+                {
+                    throw new NoSuchElementException();
+                }
+                else
+                {
+                    steps++;
+                }
+                return (get(steps-1));
+            }
+            @Override
+            public boolean hasNext()
+            {
+                return (current.next!=head&&steps<=stop);
+            }
+        };
+        return itr;
+	    //throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
 	
     }
     
@@ -95,9 +119,31 @@ public class LinkedList<E> {
      * @return an iterator for this list
      */
 
-    public Iterator<E> iterator(int start, int stop) {
-
-	throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
+    public Iterator<E> iterator(int start, int stop) 
+    {
+        LinkedListIterator itr = new LinkedListIterator(){
+            private int steps=start;
+            @Override
+            public E next()
+            {
+                if(steps>stop)
+                {
+                    throw new NoSuchElementException();
+                }
+                else
+                {
+                    steps++;
+                }
+                return (get(steps-1));
+            }
+            @Override
+            public boolean hasNext()
+            {
+                return (current.next!=head&&steps<=stop);
+            }
+        };
+        return itr;
+	   //throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
 	
     }
 
