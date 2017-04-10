@@ -85,7 +85,7 @@ public class LinearFrequencyTable implements FrequencyTable {
         Elem q = head.next;
         Elem after;
         if (q != null) {
-            while (q.next != null && key.compareTo(q.key) >= 0) {
+            while (q.next != head && key.compareTo(q.next.key) >= 0) {
                 q = q.next;
             }
             after = q.next;

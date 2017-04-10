@@ -82,6 +82,8 @@ public class TestFrequencyTable {
 	    System.out.println("values are not equals!");
 	    System.out.println(Arrays.toString(xs));
 	    System.out.println(Arrays.toString(ys));
+	} else {
+		System.out.println("Done");
 	}
 
     }

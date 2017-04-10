@@ -81,37 +81,15 @@ public class LinkedStack<E> implements Stack<E> {
      */
 
     public void roll() {
+
       
-      LinkedStack stack = new LinkedStack<E>();
-      E pop = pop();
-      roll(pop, stack);
       
     }
 
-    private void roll(E value, LinkedStack stack) {
-      E p;
-      E q;
-      while (!isEmpty()) {
-        p = pop();
-        stack.push(p);
-        roll(p, stack);
+    private void roll(E value, Elem<E> next, E pop) {
+
+       
         
-      }
-      if (isEmpty()) {
-        push(value);
-      }
-      
-//      LinkedStack temp = new LinkedStack<E>();
-//      E p;
-//      while (!isEmpty()) {
-//        p = pop();
-//        temp.push(p);
-//      }
-//      push(value);
-//      while (!temp.isEmpty()) {
-//        p = temp.pop();
-//        push(p);
-//      }
     }
 
     /** Removes the botttom element. The element is inserted on the
