@@ -85,7 +85,12 @@ public class LinkedList<E> {
     public Iterator<E> iterator(int stop) 
     {
         LinkedListIterator itr = new LinkedListIterator(){
-            private int steps=0;
+            int steps=0;
+            @Override
+            public boolean hasNext()
+            {
+                return (current.next!=head&&steps<=stop);
+            }
             @Override
             public E next()
             {
@@ -99,11 +104,7 @@ public class LinkedList<E> {
                 }
                 return (get(steps-1));
             }
-            @Override
-            public boolean hasNext()
-            {
-                return (current.next!=head&&steps<=stop);
-            }
+            
         };
         return itr;
 	    //throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
@@ -122,7 +123,12 @@ public class LinkedList<E> {
     public Iterator<E> iterator(int start, int stop) 
     {
         LinkedListIterator itr = new LinkedListIterator(){
-            private int steps=start;
+            int steps=start;
+            @Override
+            public boolean hasNext()
+            {
+                return (current.next!=head&&steps<=stop);
+            }
             @Override
             public E next()
             {
@@ -136,15 +142,37 @@ public class LinkedList<E> {
                 }
                 return (get(steps-1));
             }
+            
+        };
+        return itr;
+	   //throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
+	
+    }
+    public Iterator<E> iterator(int start, int stop, int step)
+    {
+        LinkedListIterator itr = new LinkedListIterator(){
+            int steps=start;
             @Override
             public boolean hasNext()
             {
                 return (current.next!=head&&steps<=stop);
             }
+            @Override
+            public E next()
+            {
+                if(steps>stop)
+                {
+                    throw new NoSuchElementException();
+                }
+                else
+                {
+                    steps=steps+step;
+                }
+                return (get(steps-1));
+            }
+            
         };
         return itr;
-	   //throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
-	
     }
 
     /** Returns the size of the list.
